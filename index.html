@@ -1,0 +1,4510 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#183653">
+<title>KANTORA | Virtual Office Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#183653;
+  --navy2:#102a43;
+  --blue:#3569a8;
+  --blue2:#4d83c5;
+  --bg:#f3f5f8;
+  --white:#fff;
+  --text:#17283f;
+  --muted:#778395;
+  --border:#e1e6ed;
+  --green:#23835e;
+  --red:#d65353;
+  --yellow:#d49a35;
+  --shadow:0 4px 18px rgba(27,51,78,.055);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);font-size:13px}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+input,textarea,select{
+  width:100%;padding:11px 12px;border:1px solid var(--border);
+  border-radius:7px;background:#fff;outline:none;color:var(--text)
+}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--blue);box-shadow:0 0 0 3px #3569a817
+}
+textarea{resize:vertical;line-height:1.6}
+button:disabled{opacity:.5;cursor:not-allowed}
+h1,h2,h3,h4,p{margin-top:0}
+h1,h2,h3,h4{letter-spacing:-.035em}
+.muted{color:var(--muted);line-height:1.7}
+.ui-icon{display:inline-block;vertical-align:middle;flex-shrink:0}
+.small{font-size:11px;color:var(--muted)}
+.hidden{display:none!important}
+.btn{
+  border:0;border-radius:7px;padding:11px 16px;
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;font-weight:700;font-size:11px;transition:.2s
+}
+.btn-primary{background:var(--navy);color:white}
+.btn-primary:hover{background:#294e72;transform:translateY(-1px)}
+.btn-secondary{background:#edf2f7;color:var(--navy);border:1px solid #dce5ef}
+.btn-danger{background:#fff0f0;color:#c34a4a}
+.btn-outline{border:1px solid #cbd6e1;color:var(--navy);background:white}
+.btn-small{padding:8px 11px;font-size:10px}
+.btn-block{width:100%}
+.icon-btn{
+  border:0;background:transparent;color:#738194;
+  padding:8px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center
+}
+.icon-btn:hover{background:#edf2f7;color:var(--navy)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:2px;font-size:19px}
+.brand-mark{
+  height:37px;width:37px;border-radius:9px;background:var(--blue);
+  color:white;display:grid;place-items:center;font-weight:800;font-size:20px
+}
+.eyebrow{font-size:10px;font-weight:800;letter-spacing:1.7px;color:var(--blue)}
+.page-header{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;margin-bottom:25px
+}
+.page-header h1{font-size:24px;margin:0 0 7px}
+.page-header p{margin:0;color:var(--muted);font-size:12px}
+.panel{
+  background:white;border:1px solid var(--border);
+  border-radius:10px;padding:22px;box-shadow:var(--shadow);min-width:0
+}
+.panel h3{font-size:15px;margin:0}
+.panel-heading{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:15px;margin-bottom:20px
+}
+.panel-heading p{font-size:11px;color:var(--muted);margin:6px 0 0}
+.panel-heading a{color:var(--blue);font-size:11px;font-weight:700}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.field label{font-size:11px;font-weight:700;color:#405066}
+.field input,.field textarea,.field select{font-size:12px}
+.field-help{font-size:10px;color:var(--muted);margin-top:-3px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}
+.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px;margin-bottom:20px
+}
+.stat-card{
+  background:white;border:1px solid var(--border);border-radius:9px;
+  padding:17px;box-shadow:var(--shadow)
+}
+.stat-top{display:flex;justify-content:space-between;align-items:center}
+.stat-top span{font-size:10px;color:var(--muted);font-weight:600}
+.stat-icon{
+  width:34px;height:34px;border-radius:9px;background:#eaf1fa;
+  display:grid;place-items:center;color:var(--blue);font-size:17px
+}
+.stat-card strong{display:block;font-size:25px;margin:12px 0 5px}
+.stat-card small{font-size:10px;color:var(--muted)}
+.content-grid{
+  display:grid;grid-template-columns:1.5fr 1fr;
+  gap:18px;margin-bottom:20px
+}
+.welcome-banner{
+  background:linear-gradient(115deg,#183653,#315c84);
+  color:white;padding:28px;border-radius:11px;
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:20px;min-height:155px
+}
+.welcome-banner h2{font-size:24px;margin:9px 0}
+.welcome-banner p{color:#d3dfeb;line-height:1.7;max-width:520px;margin:0}
+.welcome-banner .eyebrow{color:#b4cee7}
+.welcome-symbol{font-size:56px;opacity:.6;padding:15px}
+.task-list{display:flex;flex-direction:column}
+.task-row{
+  display:flex;align-items:center;gap:13px;
+  padding:14px 0;border-bottom:1px solid #edf0f4
+}
+.task-row:last-child{border-bottom:0}
+.task-icon{
+  height:39px;width:39px;flex-shrink:0;border-radius:8px;
+  background:#eaf1fa;color:var(--blue);display:grid;place-items:center;font-size:18px
+}
+.task-info{flex:1;min-width:0}
+.task-info strong{display:block;font-size:12px;margin-bottom:6px}
+.task-info small{font-size:10px;color:var(--muted)}
+.badge{
+  display:inline-flex;align-items:center;padding:5px 9px;
+  border-radius:20px;font-size:9px;font-weight:700;white-space:nowrap
+}
+.badge-draft{background:#f0f1f3;color:#697586}
+.badge-published{background:#e3f4ea;color:#278357}
+.badge-completed{background:#e8f0fb;color:#3569a8}
+.badge-submitted{background:#e6f1f7;color:#31738c}
+.badge-graded{background:#e1f4eb;color:#23835e}
+.badge-archived{background:#f0f1f3;color:#697586}
+.empty-state{text-align:center;padding:42px 15px}
+.empty-icon{
+  width:54px;height:54px;margin:0 auto 15px;border-radius:14px;
+  background:#edf2f8;color:var(--blue);display:grid;place-items:center;font-size:23px
+}
+.empty-state h3{font-size:14px;margin-bottom:8px}
+.empty-state p{font-size:11px;color:var(--muted);line-height:1.7;max-width:340px;margin:0 auto 17px}
+.summary-list{margin:15px 0 20px}
+.summary-list div{
+  display:flex;justify-content:space-between;padding:13px 0;
+  border-bottom:1px solid #edf0f4;font-size:11px
+}
+.summary-list span{color:var(--muted)}
+.summary-list strong{font-size:13px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th{
+  background:#f7f8fa;text-align:left;padding:13px 12px;
+  color:#68768a;font-size:10px;font-weight:700
+}
+td{padding:13px 12px;border-bottom:1px solid #edf0f4;font-size:11px}
+td strong{font-size:11px}
+.table-actions{display:flex;gap:5px}
+.table-actions button,.table-actions a{
+  border:0;background:#edf2f7;color:var(--navy);
+  padding:7px;border-radius:5px;display:inline-flex
+}
+.table-actions button:hover,.table-actions a:hover{background:#dce7f3}
+.count-label{font-size:10px;color:var(--muted);font-weight:600}
+.class-list{display:flex;flex-direction:column;gap:10px}
+.class-card{
+  display:flex;align-items:center;gap:12px;padding:14px;
+  border:1px solid var(--border);border-radius:8px
+}
+.class-card-icon{
+  width:40px;height:40px;border-radius:8px;background:#eaf1fa;
+  color:var(--blue);display:grid;place-items:center;font-size:20px
+}
+.class-card-info{flex:1;min-width:0}
+.class-card-info strong{display:block;font-size:12px;margin-bottom:5px}
+.class-card-info small{font-size:10px;color:var(--muted)}
+.class-actions{display:flex;gap:5px}
+.class-actions button{
+  border:0;background:#f0f3f7;padding:8px;border-radius:5px;color:var(--navy)
+}
+.code-result{
+  background:#eaf3fc;border:1px solid #c9ddf1;border-radius:8px;
+  padding:15px;margin-top:18px;text-align:center
+}
+.code-result span{display:block;font-size:9px;color:var(--blue);font-weight:800}
+.code-result strong{display:block;font-size:25px;letter-spacing:4px;margin:9px}
+.code-result small{color:var(--muted);font-size:10px}
+.type-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px
+}
+.type-card{
+  border:1px solid var(--border);border-radius:8px;padding:15px;
+  background:white;text-align:left;color:var(--text)
+}
+.type-card.active{border:1.5px solid var(--blue);background:#f0f6fd}
+.type-card .type-symbol{font-size:22px;color:var(--blue);display:block;margin-bottom:10px}
+.type-card strong{font-size:11px;display:block;margin-bottom:5px}
+.type-card small{font-size:9px;color:var(--muted);line-height:1.5}
+.question-editor{
+  border:1px solid var(--border);border-radius:8px;padding:15px;margin-bottom:12px
+}
+.question-editor h4{font-size:12px;margin-bottom:12px}
+.question-editor .form-grid{gap:0 10px}
+.question-options{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.rubric-line{font-size:10px;color:var(--muted);margin:6px 0}
+.assignment-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.assignment-card{
+  border:1px solid var(--border);border-radius:9px;padding:18px;
+  display:flex;flex-direction:column;gap:12px
+}
+.assignment-card-top{display:flex;justify-content:space-between;align-items:center}
+.assignment-card h3{font-size:14px;margin:0}
+.assignment-card p{font-size:11px;color:var(--muted);line-height:1.7;margin:0;flex:1}
+.assignment-card .eyebrow{font-size:9px;margin:0}
+.assignment-deadline{font-size:10px;color:var(--muted);display:flex;gap:7px;align-items:center}
+.join-form{display:flex;gap:10px;max-width:520px}
+.join-form input{flex:1}
+.student-alert{
+  display:flex;justify-content:space-between;align-items:center;gap:22px;
+  padding:24px 26px;background:#fff;border:1px solid #dce5ef;
+  border-left:4px solid var(--blue);border-radius:10px;margin-bottom:20px;
+  box-shadow:var(--shadow)
+}
+.student-alert-copy{min-width:0;flex:1}
+.student-alert-kicker{display:flex;align-items:center;gap:8px;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:1.4px;margin-bottom:10px}
+.student-alert h2{font-size:20px;margin:0 0 8px;color:var(--navy)}
+.student-alert p{font-size:12px;line-height:1.7;color:#5e6d80;margin:0 0 10px}
+.student-alert-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:10px;color:var(--muted)}
+.student-alert-action{flex-shrink:0}
+.material-layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:18px;align-items:start}
+.material-class-list{display:flex;flex-direction:column;gap:7px}
+.material-class-button{
+  width:100%;display:flex;align-items:center;gap:10px;text-align:left;
+  border:1px solid transparent;background:transparent;border-radius:8px;
+  padding:11px;color:var(--text)
+}
+.material-class-button:hover,.material-class-button.active{background:#edf3fa;border-color:#d7e3f0;color:var(--navy)}
+.material-class-button .class-label{flex:1;min-width:0;font-size:11px;font-weight:700}
+.material-class-button small{font-size:9px;color:var(--muted)}
+.class-section{margin-bottom:16px}
+.rubric-auto-note{background:#eef5fc;border:1px solid #d8e6f4;color:#45617e;border-radius:7px;padding:10px 12px;font-size:10px;line-height:1.6;margin:12px 0}
+@media(max-width:760px){
+  .student-alert{align-items:flex-start;flex-direction:column;padding:20px}
+  .student-alert-action{width:100%}
+  .student-alert-action .btn{width:100%}
+  .material-layout{grid-template-columns:1fr}
+  .material-class-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+.document-row{
+  display:flex;align-items:center;gap:12px;padding:13px 0;
+  border-bottom:1px solid #edf0f4
+}
+.document-row>div{flex:1}
+.document-row strong{display:block;font-size:11px}
+.document-row small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.document-row button{
+  border:0;background:#edf2f7;padding:8px;border-radius:5px;
+  display:flex;align-items:center;gap:5px;color:var(--navy);font-size:10px
+}
+.task-detail-hero{
+  padding:25px;background:linear-gradient(115deg,#183653,#315c84);
+  color:white;border-radius:10px;margin-bottom:18px
+}
+.task-detail-hero h2{font-size:23px;margin:10px 0}
+.task-detail-hero p{color:#d7e2ec;line-height:1.7;max-width:700px}
+.task-detail-hero .eyebrow{color:#c0d8ef}
+.task-meta{display:flex;gap:20px;flex-wrap:wrap;color:#e1e9f0;font-size:10px}
+.task-meta span{display:flex;align-items:center;gap:6px}
+.instruction-text{white-space:pre-wrap;font-size:12px;line-height:1.85;color:#536174;margin:18px 0}
+.document-list{border-top:1px solid var(--border);padding-top:18px;margin-top:18px}
+.document-list h4{font-size:12px}
+.success-panel{
+  text-align:center;background:#f0f8f3;border:1px solid #d6ebdf;
+  border-radius:9px;padding:30px 15px
+}
+.success-panel .success-icon{font-size:32px;color:var(--green)}
+.success-panel h3{font-size:15px;margin:12px 0}
+.success-panel p{font-size:11px;color:var(--muted);line-height:1.7}
+.quiz-question{
+  border:1px solid var(--border);border-radius:8px;
+  padding:17px;margin-bottom:15px
+}
+.quiz-question>strong{display:block;font-size:12px;line-height:1.7;margin-bottom:12px}
+.quiz-question>small{font-size:10px;color:var(--muted)}
+.radio-option{
+  display:flex;gap:10px;align-items:center;padding:10px;
+  background:#f8f9fb;border-radius:6px;margin-top:7px;font-size:11px
+}
+.radio-option input{width:auto}
+.review-layout{display:grid;grid-template-columns: .9fr 1.5fr;gap:18px}
+.submission-item{
+  width:100%;border:0;background:white;display:flex;align-items:center;
+  gap:10px;padding:12px 8px;text-align:left;border-bottom:1px solid #edf0f4
+}
+.submission-item:hover,.submission-item.active{background:#f0f5fb}
+.submission-item>div:nth-child(2){flex:1}
+.submission-item strong{display:block;font-size:11px}
+.submission-item small{font-size:9px;color:var(--muted)}
+.answer-box{background:#f6f8fa;border:1px solid var(--border);border-radius:8px;padding:15px}
+.answer-box strong{font-size:11px}
+.answer-box p{font-size:11px;line-height:1.8;white-space:pre-wrap;margin:10px 0}
+.text-link{border:0;background:transparent;color:var(--blue);font-weight:700;font-size:11px;display:flex;align-items:center;gap:6px}
+.result-card{display:flex;align-items:center;gap:13px;padding:16px 0;border-bottom:1px solid #edf0f4}
+.result-score{margin-left:auto;text-align:center}
+.result-score strong{display:block;font-size:23px;color:var(--blue)}
+.result-score small{font-size:9px;color:var(--muted)}
+.feedback-text{font-size:10px;color:var(--muted);line-height:1.7;margin:8px 0 0}
+.distribution{display:flex;flex-direction:column;gap:18px;padding:15px 0}
+.distribution-row{display:grid;grid-template-columns:90px 1fr 25px;gap:12px;align-items:center;font-size:10px}
+.bar-track{height:9px;background:#edf1f5;border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#4d83c5,#79a8dc);border-radius:20px}
+.app-shell{min-height:100vh}
+.sidebar{
+  width:245px;position:fixed;inset:0 auto 0 0;background:var(--navy);
+  color:white;padding:25px 15px;display:flex;flex-direction:column;z-index:50
+}
+.sidebar-brand{display:flex;align-items:center;gap:10px;padding:0 9px;font-size:19px;font-weight:800;letter-spacing:2px;margin-bottom:43px}
+.sidebar-brand .brand-mark{background:#3569a8}
+.sidebar-label{font-size:9px;color:#9fb3c7;letter-spacing:1.5px;font-weight:700;padding:0 12px;margin-bottom:13px}
+.sidebar-nav{display:flex;flex-direction:column;gap:5px}
+.nav-item{
+  display:flex;align-items:center;gap:12px;padding:12px;
+  border-radius:6px;color:#d4deea;font-size:11px;font-weight:600
+}
+.nav-item:hover{background:#ffffff12;color:white}
+.nav-item.active{background:#eaf0f6;color:var(--navy)}
+.nav-icon{width:19px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.sidebar-bottom{margin-top:auto;border-top:1px solid #ffffff20;padding-top:17px}
+.sidebar-user{display:flex;align-items:center;gap:10px;padding:0 7px;margin-bottom:15px}
+.avatar{
+  width:34px;height:34px;border-radius:50%;background:#dce8f4;
+  color:var(--navy);display:grid;place-items:center;font-size:13px;font-weight:800;flex-shrink:0
+}
+.sidebar-user strong{display:block;font-size:10px}
+.sidebar-user small{display:block;color:#a9bbcd;font-size:9px;margin-top:4px}
+.logout{
+  border:0;background:transparent;color:#d4deea;
+  display:flex;align-items:center;gap:10px;padding:10px;width:100%;
+  font-size:11px;border-radius:6px
+}
+.logout:hover{background:#ffffff12}
+.main-area{margin-left:245px;min-height:100vh}
+.topbar{
+  height:68px;background:white;border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:30;padding:0 30px;
+  display:flex;justify-content:space-between;align-items:center
+}
+.breadcrumb{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:9px}
+.breadcrumb strong{color:var(--navy);letter-spacing:1px}
+.topbar-right{display:flex;align-items:center;gap:20px}
+.topbar-profile{display:flex;align-items:center;gap:9px}
+.topbar-profile strong{display:block;font-size:10px}
+.topbar-profile small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.notification{border:0;background:white;font-size:18px;color:#68778a}
+.page-content{padding:28px 30px;max-width:1500px;margin:auto}
+.mobile-menu{display:none;border:0;background:transparent;font-size:22px}
+.overlay{display:none}
+.loading{min-height:150px;display:grid;place-items:center;color:var(--muted);font-size:12px}
+.spinner{
+  width:28px;height:28px;border:3px solid #e5eaf0;border-top-color:var(--blue);
+  border-radius:50%;animation:spin .8s linear infinite
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{
+  position:fixed;bottom:25px;right:25px;z-index:200;
+  background:var(--navy);color:white;padding:14px 19px;
+  border-radius:8px;box-shadow:0 8px 30px #0002;font-size:11px;
+  max-width:360px
+}
+.landing{background:white;min-height:100vh}
+.landing-nav{
+  height:75px;max-width:1250px;margin:auto;padding:0 30px;
+  display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)
+}
+.landing-links{display:flex;gap:30px;font-size:11px;color:#68778a;font-weight:600}
+.hero{
+  max-width:1250px;margin:auto;min-height:580px;padding:65px 35px;
+  display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:50px
+}
+.hero h1{font-size:57px;line-height:1.1;color:var(--navy);margin:15px 0 20px}
+.hero h1 span{color:var(--blue)}
+.hero p{font-size:14px;color:var(--muted);line-height:1.9;max-width:470px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:27px}
+.hero-foot{font-size:10px;color:#8a96a4;margin-top:35px}
+.hero-preview{
+  background:linear-gradient(145deg,#183653,#345d84);padding:13px;
+  border-radius:13px;box-shadow:0 25px 60px #18365330
+}
+.preview-head{display:flex;justify-content:space-between;color:white;font-size:9px;padding:10px 8px 14px;letter-spacing:1px}
+.preview-window{display:flex;background:white;border-radius:8px;overflow:hidden;min-height:340px}
+.preview-side{width:55px;background:#1c3b59;color:white;display:flex;align-items:center;flex-direction:column;gap:22px;padding:17px 0}
+.preview-side span{font-size:17px}
+.preview-main{flex:1;padding:23px}
+.preview-main h3{font-size:20px;margin:7px 0}
+.preview-main p{font-size:10px;margin-bottom:15px}
+.preview-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.preview-stat{border:1px solid var(--border);padding:11px;border-radius:7px}
+.preview-stat small{font-size:9px;color:var(--muted)}
+.preview-stat strong{display:block;font-size:20px;margin-top:7px}
+.preview-panel{border:1px solid var(--border);padding:14px;border-radius:7px;margin-top:12px}
+.preview-line{padding:10px 0;border-bottom:1px solid #edf0f4;font-size:10px;color:#58677a}
+.landing-section{padding:80px 8%;text-align:center}
+.landing-section h2{font-size:32px;color:var(--navy);max-width:700px;margin:10px auto 20px}
+.landing-section>p{font-size:13px;color:var(--muted);line-height:1.9;max-width:720px;margin:auto}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;max-width:1100px;margin:40px auto 0;text-align:left}
+.process-card,.benefit-card{border:1px solid var(--border);padding:23px;border-radius:9px;background:white}
+.process-card>span{font-size:12px;color:var(--blue);font-weight:800}
+.process-card h3,.benefit-card h3{font-size:14px;margin:15px 0 8px}
+.process-card p,.benefit-card p{font-size:11px;color:var(--muted);line-height:1.8}
+.section-soft{background:#f4f6f9}
+.benefit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;max-width:750px;margin:40px auto 0;text-align:left}
+.benefit-card>span{font-size:25px;color:var(--blue)}
+.footer{padding:32px;background:var(--navy2);color:white;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.footer small{color:#b9c8d7;font-size:10px}
+.auth-page{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:white}
+.auth-left{
+  background:linear-gradient(140deg,#102a43,#315d83);padding:40px 9%;
+  display:flex;flex-direction:column;justify-content:space-between;color:white
+}
+.auth-left .brand-mark{background:#4b7eae}
+.auth-left h1{font-size:54px;line-height:1.12;margin:15px 0}
+.auth-left p{color:#d3dfeb;line-height:1.8;max-width:380px}
+.auth-left .eyebrow{color:#b9d2e9}
+.auth-left small{font-size:10px;color:#b8c7d5}
+.auth-right{display:grid;place-items:center;padding:35px}
+.auth-form{width:100%;max-width:400px}
+.auth-form h2{font-size:27px;margin:0 0 8px}
+.auth-form>p{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:28px}
+.auth-form .btn{width:100%;margin-top:10px}
+.auth-switch{text-align:center;font-size:11px;color:var(--muted);margin-top:20px}
+.auth-switch a{color:var(--blue);font-weight:700}
+.auth-note{font-size:10px;color:var(--muted);line-height:1.7;background:#f2f5f8;padding:12px;border-radius:7px;margin-top:23px}
+.notice{padding:12px;border-radius:7px;font-size:11px;margin:12px 0;line-height:1.6}
+.notice.error{background:#fff0f0;color:#b74747}
+.notice.success{background:#e9f7ef;color:#267b53}
+.notice.info{background:#eef5fc;color:#365f86;border:1px solid #d8e6f4}
+.config-screen{min-height:100vh;display:grid;place-items:center;padding:20px}
+.config-card{max-width:480px;background:white;padding:35px;border-radius:12px;text-align:center;border:1px solid var(--border)}
+.config-card h2{font-size:21px}
+.config-card p{font-size:12px;color:var(--muted);line-height:1.8}
+.config-card code{display:block;text-align:left;background:#f3f5f8;padding:11px;border-radius:5px;margin-top:8px;font-size:10px;overflow-wrap:anywhere}
+
+/* Fitur pengelolaan, Undo, dan identitas visual KANTORA */
+#toast-container{position:fixed;right:25px;bottom:25px;z-index:200;display:flex;flex-direction:column;gap:9px;align-items:flex-end;pointer-events:none}
+.toast{position:relative;inset:auto;display:flex;align-items:center;gap:12px;line-height:1.5;pointer-events:auto}
+.toast-message{flex:1;min-width:0}
+.toast-undo{
+  border:1px solid #ffffff70;background:#ffffff18;color:#fff;
+  border-radius:6px;padding:7px 10px;font-size:10px;font-weight:800;white-space:nowrap
+}
+.toast-undo:hover{background:#ffffff30}
+.toast-meta{font-size:9px;color:#d6e2ed;white-space:nowrap}
+.class-open{
+  flex:1;min-width:0;border:0;background:transparent;color:inherit;
+  display:flex;align-items:center;gap:12px;text-align:left;padding:0
+}
+.class-open:hover .class-card-info strong{color:var(--blue)}
+.class-actions{display:flex;gap:5px;align-items:center;flex-shrink:0}
+.class-actions button{border:0;background:#f0f3f7;padding:8px;border-radius:5px;color:var(--navy)}
+.class-actions button:hover{background:#dce7f3}
+.student-table{width:100%;border-collapse:collapse;min-width:460px}
+.student-table th,.student-table td{padding:12px;border-bottom:1px solid #edf0f4;text-align:left}
+.student-table th{background:#f7f8fa;color:#68768a;font-size:10px}
+.student-table td{font-size:11px}
+.pending-label{display:inline-flex;align-items:center;gap:5px;background:#fff5e5;color:#93651d;border-radius:20px;padding:5px 8px;font-size:9px;font-weight:700}
+.inline-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.inline-form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.existing-file{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #edf0f4}
+.existing-file>span:nth-child(2){flex:1;min-width:0;font-size:10px;overflow-wrap:anywhere}
+.existing-file button{border:0;background:#fff0f0;color:#b74747;border-radius:5px;padding:7px}
+.readonly-answer{background:#f6f8fa;border:1px solid var(--border);border-radius:8px;padding:14px;margin:12px 0}
+.readonly-answer p{font-size:11px;line-height:1.8;white-space:pre-wrap;margin:8px 0}
+.readonly-answer .answer-file{margin-top:10px}
+.deadline-lock{background:#fff6e9;border:1px solid #f0dfc3;color:#815b20;padding:12px;border-radius:8px;font-size:11px;line-height:1.7;margin:12px 0}
+.confirm-backdrop{
+  position:fixed;inset:0;background:#102a4380;z-index:500;
+  display:grid;place-items:center;padding:20px
+}
+.confirm-dialog{
+  width:min(420px,100%);background:white;border-radius:12px;
+  box-shadow:0 25px 70px #0003;padding:24px
+}
+.confirm-dialog h3{font-size:16px;margin:0 0 9px}
+.confirm-dialog p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+.confirm-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:22px}
+.logo-stage{
+  min-height:430px;border-radius:13px;background:
+    radial-gradient(circle at 50% 45%,#5e86ae55,transparent 38%),
+    linear-gradient(145deg,#102a43,#315d83);
+  box-shadow:0 25px 60px #18365330;display:grid;place-items:center;position:relative;overflow:hidden
+}
+.logo-stage:before,.logo-stage:after{
+  content:"";position:absolute;border:1px solid #ffffff18;border-radius:50%;
+  width:360px;height:360px
+}
+.logo-stage:after{width:470px;height:470px}
+.kantora-logo-large{
+  position:relative;z-index:1;width:190px;height:190px;border-radius:38px;
+  display:grid;place-items:center;background:linear-gradient(145deg,#ffffff,#dce8f4);
+  box-shadow:0 25px 65px #061a2d70,inset 0 1px 0 #fff
+}
+.kantora-logo-large svg{width:116px;height:116px}
+@media(max-width:760px){
+  .logo-stage{min-height:300px}
+  .kantora-logo-large{width:150px;height:150px;border-radius:30px}
+  .kantora-logo-large svg{width:94px;height:94px}
+  .class-card{align-items:flex-start}
+  .class-actions{flex-wrap:wrap;justify-content:flex-end}
+}
+
+@media(max-width:1050px){
+  .sidebar{width:220px}.main-area{margin-left:220px}
+  .page-content{padding:23px 20px}.topbar{padding:0 20px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .hero{gap:25px}.hero h1{font-size:46px}
+}
+@media(max-width:760px){
+  .sidebar{transform:translateX(-100%);transition:.25s;width:250px}
+  .sidebar.open{transform:translateX(0)}
+  .main-area{margin-left:0}
+  .mobile-menu{display:block}
+  .topbar{height:60px;padding:0 15px}
+  .topbar-profile>div:last-child{display:none}
+  .breadcrumb{display:none}
+  .page-content{padding:20px 14px}
+  .page-header{align-items:flex-start;flex-direction:column}
+  .page-header h1{font-size:21px}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:9px}
+  .stat-card{padding:13px}
+  .stat-card strong{font-size:22px}
+  .content-grid,.review-layout{grid-template-columns:1fr}
+  .assignment-grid{grid-template-columns:1fr}
+  .type-grid{grid-template-columns:repeat(2,1fr)}
+  .form-grid{grid-template-columns:1fr}
+  .welcome-banner{padding:21px}
+  .welcome-banner h2{font-size:20px}
+  .welcome-symbol{display:none}
+  .overlay.show{display:block;position:fixed;inset:0;background:#0006;z-index:40}
+  .hero{grid-template-columns:1fr;padding:45px 20px;gap:35px}
+  .hero h1{font-size:43px}
+  .landing-nav{padding:0 17px}
+  .landing-links{display:none}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .auth-page{grid-template-columns:1fr}
+  .auth-left{display:none}
+  .auth-right{min-height:100vh;padding:25px}
+  .landing-section{padding:60px 20px}
+  .landing-section h2{font-size:25px}
+  .footer{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:420px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .process-grid,.benefit-grid{grid-template-columns:1fr}
+  .join-form{flex-direction:column}
+  .task-row{gap:8px}
+  .task-info strong{font-size:10px}
+  .badge{font-size:8px}
+}
+
+/* Evaluasi otomatis dan grafik perkembangan */
+.auto-score-panel{
+  background:#eef5fc;border:1px solid #d8e6f4;border-radius:8px;
+  padding:14px;margin:14px 0;color:#365879
+}
+.auto-score-panel strong{font-size:11px}
+.auto-score-panel p{font-size:10px;line-height:1.7;margin:7px 0 0}
+.auto-score-panel .question-review-row{
+  display:flex;justify-content:space-between;gap:12px;padding:9px 0;
+  border-top:1px solid #dce8f4;font-size:10px;line-height:1.5
+}
+.auto-score-panel .question-review-row:first-of-type{margin-top:10px}
+.auto-score-panel .question-review-row span:last-child{font-weight:800;white-space:nowrap}
+.auto-score-note{font-size:10px;line-height:1.65;color:#5d7188;margin:8px 0 0}
+.trend-chart{
+  width:100%;overflow-x:auto;border:1px solid #edf0f4;border-radius:8px;
+  background:#fff;padding:8px 8px 2px
+}
+.trend-chart svg{display:block;width:100%;min-width:440px;height:auto}
+.trend-chart .grid-line{stroke:#e9eef4;stroke-width:1}
+.trend-chart .axis-label{fill:#8390a0;font-size:10px;font-family:Inter,sans-serif}
+.trend-chart .point-label{fill:#526176;font-size:10px;font-family:Inter,sans-serif}
+.trend-chart .trend-line{fill:none;stroke:#3569a8;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.trend-chart .trend-point{fill:#fff;stroke:#3569a8;stroke-width:3}
+.trend-summary{
+  margin:12px 0 0;padding:11px 13px;background:#f5f8fb;border-radius:7px;
+  color:#53657a;font-size:11px;line-height:1.7
+}
+.report-student-list,.report-assignment-list{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px
+}
+.report-student-button,.report-assignment-button{
+  border:1px solid var(--border);border-radius:8px;background:white;
+  color:var(--text);padding:12px;text-align:left;display:flex;align-items:center;gap:10px;
+  min-width:0
+}
+.report-student-button:hover,.report-assignment-button:hover,
+.report-student-button.active,.report-assignment-button.active{
+  border-color:#9bb7d5;background:#f1f6fc
+}
+.report-student-button .student-report-copy,
+.report-assignment-button .assignment-report-copy{flex:1;min-width:0}
+.report-student-button strong,.report-assignment-button strong{
+  display:block;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+}
+.report-student-button small,.report-assignment-button small{
+  display:block;font-size:9px;color:var(--muted);margin-top:4px
+}
+.report-student-button .report-average{
+  font-size:16px;font-weight:800;color:var(--blue);white-space:nowrap
+}
+.report-detail-heading{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  margin-bottom:14px;flex-wrap:wrap
+}
+.report-detail-heading h3{font-size:14px;margin:0}
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.analysis-column{border:1px solid #edf0f4;border-radius:8px;padding:13px;min-width:0}
+.analysis-column h4{font-size:11px;margin:0 0 10px}
+.analysis-entry{padding:10px 0;border-top:1px solid #edf0f4}
+.analysis-entry:first-of-type{border-top:0}
+.analysis-entry-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.analysis-entry-top strong{font-size:10px;line-height:1.5;min-width:0}
+.analysis-entry-top span{font-size:10px;font-weight:800;white-space:nowrap;color:var(--blue)}
+.analysis-entry small{display:block;font-size:9px;color:var(--muted);margin-top:4px}
+.analysis-progress{height:6px;background:#edf1f5;border-radius:10px;overflow:hidden;margin-top:8px}
+.analysis-progress>span{display:block;height:100%;border-radius:10px;background:#6f9dce}
+.analysis-empty{font-size:10px;color:var(--muted);line-height:1.7}
+.report-intro{font-size:10px;color:var(--muted);line-height:1.7;margin:0 0 13px}
+.report-student-detail{margin-top:18px}
+@media(max-width:760px){
+  .analysis-grid{grid-template-columns:1fr}
+  .report-student-list,.report-assignment-list{grid-template-columns:1fr}
+  .trend-chart svg{min-width:380px}
+}
+
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="loading"><div class="spinner"></div></div>
+</div>
+<div id="toast-container"></div>
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+/* =====================================================
+   KONFIGURASI SUPABASE
+===================================================== */
+
+const SUPABASE_URL = "https://ewncrehmhlmndnyfdvrv.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_biGziIuWu-M4LC6vcxDnzw_bRrY2AEh";
+
+const configured =
+  SUPABASE_URL.startsWith("https://") &&
+  !SUPABASE_URL.includes("YOUR_PROJECT_ID") &&
+  SUPABASE_ANON_KEY !== "YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+const sb = configured
+  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
+
+/* =====================================================
+   STATE
+===================================================== */
+
+const state = {
+  session: null,
+  profile: null,
+  page: "dashboard",
+  authMode: "landing",
+  loading: false,
+  showAssignmentForm: false,
+  assignmentType: "case",
+  quizDraft: [],
+  reviewAssignmentId: "",
+  reportClassId: "",
+  reportStudentId: "",
+  reportAssignmentId: "",
+  selectedSubmissionId: "",
+  currentTaskId: "",
+  selectedClassId: "",
+  selectedMaterialClassId: "",
+  editingClassId: "",
+  classCode: "",
+  classCodeClassId: "",
+  editingAssignmentId: "",
+  editingAssignment: null,
+  editingMaterialId: "",
+  editingMaterial: null,
+  pendingTimers: {},
+  deadlineTimer: null,
+  confirmCallback: null,
+  renderToken: 0
+};
+
+const app = document.getElementById("app");
+
+const TEACHER_NAV = [
+  ["dashboard","home","Dashboard"],
+  ["classes","users","Kelas & Siswa"],
+  ["assignments","clipboard","Penugasan"],
+  ["materials","book","Materi & Dokumen"],
+  ["reports","chart","Hasil & Evaluasi"],
+  ["profile","settings","Pengaturan"]
+];
+
+const STUDENT_NAV = [
+  ["dashboard","home","Dashboard"],
+  ["classes","users","Kelas Saya"],
+  ["assignments","clipboard","Penugasan"],
+  ["documents","file","Materi & Dokumen"],
+  ["results","chart","Hasil & Evaluasi"],
+  ["profile","settings","Profil Saya"]
+];
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+
+function esc(value){
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[char]);
+}
+
+const ICON_PATHS={
+  home:'<path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/>',
+  users:'<path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  clipboard:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1Z"/><path d="M9 10h6M9 14h6M9 18h3"/>',
+  file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+  chart:'<path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 5-7"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.7 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.7-1l-1.7.6-1.4-2.4L7.3 15a8 8 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.7-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.7 1l1.7-.6 1.4 2.4-1.4 1.1a8 8 0 0 1-.1 2Z"/>',
+  inbox:'<path d="M4 4h16l2 10v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-5Z"/><path d="M2 14h5l2 3h6l2-3h5"/>',
+  briefcase:'<rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/>',
+  pencil:'<path d="m4 16.5-.8 4.3 4.3-.8L20 7.5 16.5 4Z"/><path d="m14.5 6 3.5 3.5"/>',
+  trash:'<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v5M14 11v5"/>',
+  search:'<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  check:'<path d="m5 12 4 4L19 6"/>',
+  upload:'<path d="M12 16V4m-4 4 4-4 4 4"/><path d="M4 16v4h16v-4"/>',
+  download:'<path d="M12 4v12m-4-4 4 4 4-4"/><path d="M4 20h16"/>',
+  external:'<path d="M14 3h7v7M10 14 21 3"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/>',
+  bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>',
+  alert:'<path d="M12 3 2.8 20h18.4Z"/><path d="M12 9v4M12 17h.01"/>',
+  book:'<path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22Z"/><path d="M4 4.5v17.5M8 6h8M8 10h8"/>',
+  graduation:'<path d="m2 9 10-5 10 5-10 5Z"/><path d="M6 11v5c4 3 8 3 12 0v-5M22 9v6"/>',
+  fileCheck:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 15l2 2 5-5"/>'
+};
+
+function uiIcon(name,size=18){
+  const paths=ICON_PATHS[name]||ICON_PATHS.file;
+  return `<svg class="ui-icon" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+}
+
+function date(value){
+  if(!value) return "-";
+  return new Date(value).toLocaleString("id-ID",{
+    day:"2-digit",month:"short",year:"numeric",
+    hour:"2-digit",minute:"2-digit"
+  });
+}
+
+function rupiah(value){
+  return new Intl.NumberFormat("id-ID").format(value);
+}
+
+function notify(message,type="success",options={}){
+  const container=document.getElementById("toast-container");
+  if(!container)return;
+  const el=document.createElement("div");
+  el.className="toast";
+  const text=document.createElement("span");
+  text.className="toast-message";
+  text.textContent=message;
+  el.appendChild(text);
+  if(options.undoKey){
+    const undo=document.createElement("button");
+    undo.type="button";
+    undo.className="toast-undo";
+    undo.textContent="Undo";
+    undo.dataset.undoDelete=options.undoKey;
+    el.appendChild(undo);
+    const meta=document.createElement("small");
+    meta.className="toast-meta";
+    meta.textContent="5 detik";
+    el.appendChild(meta);
+  }
+  if(type==="error") el.style.background="#a83e3e";
+  container.appendChild(el);
+  setTimeout(()=>el.remove(),options.duration||5000);
+}
+
+const DELETE_DELAY_MS=5*1000;
+const PENDING_DELETE_KEY="kantora_pending_deletions_v1";
+
+function readPendingDeletes(){
+  try{
+    const rows=JSON.parse(localStorage.getItem(PENDING_DELETE_KEY)||"[]");
+    return Array.isArray(rows)?rows:[];
+  }catch(_){return [];}
+}
+
+function writePendingDeletes(rows){
+  try{localStorage.setItem(PENDING_DELETE_KEY,JSON.stringify(rows));}
+  catch(error){throw new Error("Undo tidak dapat disiapkan karena penyimpanan browser diblokir. Coba aktifkan penyimpanan situs lalu ulangi.");}
+}
+
+function pendingForCurrentUser(){
+  const userId=state.session?.user?.id;
+  return readPendingDeletes().filter(x=>x.userId===userId);
+}
+
+function isPendingDeletion(type,id){
+  const key=String(id);
+  return pendingForCurrentUser().some(x=>x.type===type&&String(x.id)===key);
+}
+
+function dateTimeLocal(value){
+  if(!value)return "";
+  const d=new Date(value);
+  if(Number.isNaN(d.getTime()))return "";
+  const pad=n=>String(n).padStart(2,"0");
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function deadlinePassed(task){
+  return Boolean(task?.status==="completed"||(task?.due_at&&new Date(task.due_at).getTime()<Date.now()));
+}
+
+function membershipKey(classId,studentId){
+  return `${classId}:${studentId}`;
+}
+
+function filterPendingMemberships(rows){
+  return rows.filter(row =>
+    row.classes?.is_archived !== true &&
+    !isPendingDeletion("membership", membershipKey(row.class_id, state.session.user.id))
+  );
+}
+
+function showConfirm(message,onConfirm,confirmLabel="Lanjutkan"){
+  const old=document.getElementById("kantora-confirm");
+  if(old)old.remove();
+  state.confirmCallback=onConfirm;
+  const modal=document.createElement("div");
+  modal.id="kantora-confirm";
+  modal.className="confirm-backdrop";
+  modal.innerHTML=`<div class="confirm-dialog" role="dialog" aria-modal="true">
+    <h3>Konfirmasi</h3>
+    <p>${esc(message)}</p>
+    <div class="confirm-actions">
+      <button type="button" class="btn btn-secondary" data-confirm-cancel>Batal</button>
+      <button type="button" class="btn btn-primary" data-confirm-accept>${esc(confirmLabel)}</button>
+    </div>
+  </div>`;
+  document.body.appendChild(modal);
+}
+
+function showUndoToast(item,message){
+  const remaining=Math.max(1000,item.expiresAt-Date.now());
+  notify(message,"success",{undoKey:item.key,duration:remaining});
+}
+
+function removePendingItem(key){
+  const rows=readPendingDeletes().filter(x=>x.key!==key);
+  writePendingDeletes(rows);
+  if(state.pendingTimers[key])clearTimeout(state.pendingTimers[key]);
+  delete state.pendingTimers[key];
+}
+
+async function undoPendingDeletion(key){
+  const item=readPendingDeletes().find(x=>x.key===key);
+  if(!item)return;
+  try{
+    if(item.userId!==state.session?.user?.id)throw new Error("Aksi ini dibuat oleh akun lain.");
+    if(item.type==="class"){
+      await query(sb.from("classes").update({is_archived:Boolean(item.meta?.wasArchived)}).eq("id",item.id));
+    }else if(item.type==="assignment"){
+      await query(sb.from("assignments").update({status:item.meta?.previousStatus||"draft"}).eq("id",item.id));
+    }else if(item.type==="membership"){
+      await query(sb.rpc("kantora_restore_class_member",{
+        p_class_id:item.meta.classId,
+        p_student_id:item.meta.studentId
+      }));
+    }
+    removePendingItem(key);
+    notify("Penghapusan dibatalkan. Data berhasil dipulihkan.");
+    await render();
+  }catch(error){fail(error);}
+}
+
+async function removeStoragePaths(paths){
+  const clean=[...new Set((paths||[]).filter(Boolean))];
+  if(!clean.length)return;
+  const {error}=await sb.storage.from("kantora-private").remove(clean);
+  if(error)console.warn("Berkas tidak dapat dihapus dari penyimpanan:",error.message);
+}
+
+async function permanentlyDeleteAssignment(assignmentId){
+  const [files,submissions,criteria,questions]=await Promise.all([
+    query(sb.from("assignment_files").select("id,storage_path").eq("assignment_id",assignmentId)),
+    query(sb.from("submissions").select("id,submitted_file_path").eq("assignment_id",assignmentId)),
+    query(sb.from("rubric_criteria").select("id").eq("assignment_id",assignmentId)),
+    query(sb.from("quiz_questions").select("id").eq("assignment_id",assignmentId))
+  ]);
+
+  const submissionIds=submissions.map(x=>x.id);
+  const criterionIds=criteria.map(x=>x.id);
+  const questionIds=questions.map(x=>x.id);
+
+  await removeStoragePaths([
+    ...files.map(x=>x.storage_path),
+    ...submissions.map(x=>x.submitted_file_path)
+  ]);
+
+  if(submissionIds.length){
+    await query(sb.from("submission_rubric_scores").delete().in("submission_id",submissionIds));
+    await query(sb.from("submission_grades").delete().in("submission_id",submissionIds));
+    await query(sb.from("submissions").delete().in("id",submissionIds));
+  }
+  if(criterionIds){
+    if(criterionIds.length)await query(sb.from("submission_rubric_scores").delete().in("criterion_id",criterionIds));
+    if(criterionIds.length)await query(sb.from("rubric_criteria").delete().in("id",criterionIds));
+  }
+  if(questionIds.length){
+    await query(sb.from("quiz_answer_keys").delete().in("question_id",questionIds));
+    await query(sb.from("quiz_options").delete().in("question_id",questionIds));
+    await query(sb.from("quiz_questions").delete().in("id",questionIds));
+  }
+  if(files.length)await query(sb.from("assignment_files").delete().in("id",files.map(x=>x.id)));
+  await query(sb.from("assignments").delete().eq("id",assignmentId));
+}
+
+async function finalizePendingDeletion(item){
+  if(!state.session||item.userId!==state.session.user.id)return;
+  const current=readPendingDeletes().find(x=>x.key===item.key);
+  if(!current)return;
+  if(current.expiresAt>Date.now()){
+    schedulePendingDeletion(current);
+    return;
+  }
+  try{
+    switch(item.type){
+      case "class":{
+        const linked=await query(sb.from("assignments").select("id").eq("class_id",item.id));
+        for(const assignment of linked){
+          await permanentlyDeleteAssignment(assignment.id);
+        }
+        await query(sb.from("class_members").delete().eq("class_id",item.id));
+        await query(sb.from("classes").delete().eq("id",item.id));
+        if(state.selectedClassId===item.id)state.selectedClassId="";
+        break;
+      }
+      case "membership":{
+        // Hapus catatan Undo di database setelah jendela 5 detik berakhir.
+        await query(sb.rpc("kantora_finalize_class_member_removal",{
+          p_class_id:item.meta.classId,
+          p_student_id:item.meta.studentId
+        }));
+        break;
+      }
+      case "assignment":{
+        await permanentlyDeleteAssignment(item.id);
+        break;
+      }
+      case "material":{
+        const row=await query(sb.from("materials").select("storage_path").eq("id",item.id).single());
+        await removeStoragePaths([row.storage_path]);
+        await query(sb.from("materials").delete().eq("id",item.id));
+        break;
+      }
+      case "submission":{
+        const row=await query(sb.from("submissions").select("submitted_file_path").eq("id",item.id).single());
+        await query(sb.from("submission_rubric_scores").delete().eq("submission_id",item.id));
+        await query(sb.from("submission_grades").delete().eq("submission_id",item.id));
+        await query(sb.from("submissions").delete().eq("id",item.id));
+        await removeStoragePaths([row.submitted_file_path]);
+        break;
+      }
+      case "assignment_file":{
+        const row=await query(sb.from("assignment_files").select("storage_path").eq("id",item.id).single());
+        await query(sb.from("assignment_files").delete().eq("id",item.id));
+        await removeStoragePaths([row.storage_path]);
+        break;
+      }
+    }
+    removePendingItem(item.key);
+    notify("Data telah dihapus permanen.");
+    await render();
+  }catch(error){
+    if(item.type==="class"){
+      try{await query(sb.from("classes").update({is_archived:Boolean(item.meta?.wasArchived)}).eq("id",item.id));}catch(_){}
+    }
+    if(item.type==="assignment"){
+      try{await query(sb.from("assignments").update({status:item.meta?.previousStatus||"draft"}).eq("id",item.id));}catch(_){}
+    }
+    removePendingItem(item.key);
+    fail(error);
+    await render();
+  }
+}
+
+function schedulePendingDeletion(item){
+  if(!state.session||item.userId!==state.session.user.id)return;
+  if(state.pendingTimers[item.key])clearTimeout(state.pendingTimers[item.key]);
+  const remaining=Math.max(0,item.expiresAt-Date.now());
+  state.pendingTimers[item.key]=setTimeout(()=>finalizePendingDeletion(item),remaining);
+}
+
+async function queueDeletion(type,id,meta={},message="Data akan dihapus dalam 5 detik."){
+  const userId=state.session?.user?.id;
+  if(!userId)throw new Error("Sesi pengguna tidak tersedia.");
+  const existing=readPendingDeletes().find(x=>x.userId===userId&&x.type===type&&String(x.id)===String(id));
+  if(existing){
+    showUndoToast(existing,message);
+    return;
+  }
+
+  const item={
+    key:crypto.randomUUID(),
+    type,
+    id:String(id),
+    meta,
+    userId,
+    createdAt:Date.now(),
+    expiresAt:Date.now()+DELETE_DELAY_MS
+  };
+  const rows=readPendingDeletes();
+  rows.push(item);
+  writePendingDeletes(rows);
+
+  try{
+    if(type==="class"){
+      await query(sb.from("classes").update({is_archived:true}).eq("id",id));
+    }else if(type==="assignment"){
+      await query(sb.from("assignments").update({status:"archived"}).eq("id",id));
+    }else if(type==="membership"){
+      await query(sb.rpc("kantora_remove_class_member",{
+        p_class_id:meta.classId,
+        p_student_id:meta.studentId
+      }));
+    }
+  }catch(error){
+    removePendingItem(item.key);
+    throw error;
+  }
+
+  schedulePendingDeletion(item);
+  showUndoToast(item,message);
+  await render();
+}
+
+async function resumePendingDeletions(){
+  if(!state.session)return;
+  const items=pendingForCurrentUser();
+  for(const item of items){
+    if(item.expiresAt<=Date.now())await finalizePendingDeletion(item);
+    else{
+      schedulePendingDeletion(item);
+      showUndoToast(item,`Penghapusan tertunda. Kamu masih bisa memulihkan data ini.`);
+    }
+  }
+}
+
+function renderSubmissionAnswer(value){
+  const raw=String(value||"");
+  try{
+    const parsed=JSON.parse(raw);
+    if(parsed?.kind==="kantora_quiz"&&Array.isArray(parsed.answers)){
+      return `<div class="quiz-answer-summary">${parsed.answers.map((a,i)=>`
+        <div class="readonly-answer"><strong>${i+1}. ${esc(a.question||"Pertanyaan")}</strong>
+          <p>${esc(a.answer||"Belum dijawab")}</p></div>`).join("")}</div>`;
+    }
+  }catch(_){}
+  return `<p>${esc(raw||"Tidak ada jawaban teks.")}</p>`;
+}
+
+function fail(error){
+  console.error(error);
+  notify(error?.message || "Terjadi kesalahan.", "error");
+}
+
+function loading(){
+  return '<div class="loading"><div class="spinner"></div></div>';
+}
+
+function badge(status){
+  const labels={
+    draft:"Draft",
+    published:"Aktif",
+    completed:"Selesai",
+    archived:"Diarsipkan",
+    submitted:"Menunggu Penilaian",
+    graded:"Sudah Dinilai"
+  };
+  return `<span class="badge badge-${esc(status)}">${esc(labels[status] || status)}</span>`;
+}
+
+function gradeRows(value) {
+  return Array.isArray(value)
+    ? value
+    : value
+      ? [value]
+      : [];
+}
+
+
+const KANTORA_ANALYSIS_MARKER = /<!--KANTORA_ANALYSIS_V1:([\s\S]*?)-->/;
+
+function unpackGradeFeedback(value){
+  const raw=String(value||"");
+  const match=raw.match(KANTORA_ANALYSIS_MARKER);
+  let analysis=null;
+  if(match){
+    try{analysis=JSON.parse(decodeURIComponent(match[1]));}
+    catch(error){console.warn("Metadata evaluasi tidak dapat dibaca:",error);}
+  }
+  return {
+    text:raw.replace(KANTORA_ANALYSIS_MARKER,"").trim(),
+    analysis
+  };
+}
+
+function packGradeFeedback(feedback,analysis){
+  const clean=String(feedback||"").replace(KANTORA_ANALYSIS_MARKER,"").trim();
+  if(!analysis)return clean;
+  const metadata=`<!--KANTORA_ANALYSIS_V1:${encodeURIComponent(JSON.stringify(analysis))}-->`;
+  return `${clean}${clean?"\n\n":""}${metadata}`;
+}
+
+function normalizeScoringText(value){
+  return String(value||"")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9\s]/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+}
+
+const SCORING_STOP_WORDS=new Set([
+  "yang","dan","atau","dengan","untuk","dari","pada","dalam","oleh","secara",
+  "adalah","agar","karena","jika","maka","serta","ini","itu","tersebut",
+  "siswa","peserta","didik","anda","kamu","mereka","dapat","mampu","harus",
+  "akan","telah","sudah","belum","lebih","kurang","sebuah","suatu","setiap",
+  "tentang","terhadap","antara","melalui","sesuai","berdasarkan","sebagai",
+  "melakukan","membuat","memberikan","menjelaskan","menentukan","menyebutkan",
+  "menguraikan","menyajikan","menunjukkan","menerapkan","menyusun","menilai",
+  "jawaban","hasil","pekerjaan","tugas","aspek","kriteria","penilaian"
+]);
+const SCORING_GENERIC_WORDS=new Set([
+  "ketepatan","kesesuaian","kelengkapan","kualitas","kemampuan","pemahaman",
+  "analisis","jawaban","lengkap","tepat","baik","benar","jelas","logis",
+  "sesuai","mampu","dapat","secara","kriteria","aspek","hasil"
+]);
+
+function scoringKeywords(value){
+  const words=normalizeScoringText(value).split(" ").filter(word=>word.length>=4);
+  let useful=[...new Set(words.filter(word=>
+    !SCORING_STOP_WORDS.has(word)&&!SCORING_GENERIC_WORDS.has(word)
+  ))];
+  if(!useful.length){
+    useful=[...new Set(words.filter(word=>!SCORING_STOP_WORDS.has(word)))];
+  }
+  return useful;
+}
+
+function scoringTermMatches(left,right){
+  if(left===right)return true;
+  if(Math.min(left.length,right.length)>=5){
+    return left.includes(right)||right.includes(left);
+  }
+  return false;
+}
+
+function keywordCoverage(keywords,answerTokens){
+  if(!keywords.length)return {matched:[],percent:0};
+  const matched=keywords.filter(keyword=>
+    answerTokens.some(token=>scoringTermMatches(keyword,token))
+  );
+  return {matched,percent:matched.length/keywords.length*100};
+}
+
+function rubricQuestionOverlap(criterion,question){
+  const criteriaTokens=scoringKeywords(`${criterion.criterion_name||""} ${criterion.description||""}`);
+  const questionTokens=scoringKeywords(question.question_text||"");
+  if(!criteriaTokens.length||!questionTokens.length)return 0;
+  return criteriaTokens.filter(token=>
+    questionTokens.some(q=>scoringTermMatches(token,q))
+  ).length/criteriaTokens.length;
+}
+
+async function loadQuizEvaluationDetails(assignmentId){
+  const questions=await query(sb.from("quiz_questions")
+    .select("id,assignment_id,question_text,question_order,points")
+    .eq("assignment_id",assignmentId).order("question_order"));
+  if(!questions.length)return {questions:[],keysByQuestion:{},optionsByQuestion:{}};
+
+  const questionIds=questions.map(q=>q.id);
+  const [keys,options]=await Promise.all([
+    query(sb.from("quiz_answer_keys")
+      .select("question_id,correct_option_id").in("question_id",questionIds)),
+    query(sb.from("quiz_options")
+      .select("id,question_id,option_text,option_order").in("question_id",questionIds))
+  ]);
+  return {
+    questions,
+    keysByQuestion:Object.fromEntries(keys.map(x=>[x.question_id,x])),
+    optionsByQuestion:options.reduce((map,option)=>{
+      (map[option.question_id] ||= []).push(option);
+      return map;
+    },{})
+  };
+}
+
+function buildAutomaticEvaluation(assignment,submission,criteria,quizDetails={}){
+  const maxScore=Number(assignment?.max_score||100);
+  const criterionScores={};
+  const items=[];
+
+  if(assignment?.type==="quiz"){
+    const questions=quizDetails.questions||[];
+    if(!questions.length)return null;
+    const answers=storedQuizAnswers(submission);
+    const questionRows=[];
+    for(const question of questions){
+      const key=quizDetails.keysByQuestion?.[question.id];
+      if(!key?.correct_option_id)return null;
+      const options=quizDetails.optionsByQuestion?.[question.id]||[];
+      const selectedId=answers[question.id]||"";
+      const selectedOption=options.find(option=>option.id===selectedId);
+      const correctOption=options.find(option=>option.id===key.correct_option_id);
+      const points=Math.max(0,Number(question.points||1));
+      const correct=Boolean(selectedId&&selectedId===key.correct_option_id);
+      questionRows.push({
+        id:question.id,
+        name:question.question_text,
+        question_order:question.question_order,
+        earned:correct?points:0,
+        max_points:points,
+        percent:correct?100:0,
+        correct,
+        selected_answer:selectedOption?.option_text||"Belum dijawab",
+        correct_answer:correctOption?.option_text||"Kunci jawaban tersedia"
+      });
+    }
+
+    const totalPoints=questionRows.reduce((sum,row)=>sum+row.max_points,0);
+    if(totalPoints<=0)return null;
+    const earnedPoints=questionRows.reduce((sum,row)=>sum+row.earned,0);
+    const overallPercent=earnedPoints/totalPoints*100;
+
+    for(const criterion of criteria||[]){
+      const related=questions
+        .map(question=>({
+          question,
+          result:questionRows.find(row=>row.id===question.id),
+          overlap:rubricQuestionOverlap(criterion,question)
+        }))
+        .filter(row=>row.overlap>0);
+      const percent=related.length
+        ?related.reduce((sum,row)=>sum+row.result.percent,0)/related.length
+        :overallPercent;
+      const earned=Math.round(Number(criterion.max_points||0)*percent)/100;
+      criterionScores[criterion.id]=earned;
+      items.push({
+        kind:"criterion",
+        id:criterion.id,
+        name:criterion.criterion_name,
+        earned,
+        max_points:Number(criterion.max_points||0),
+        percent,
+        related_questions:related.map(row=>row.question.question_text)
+      });
+    }
+
+    questionRows.forEach(row=>items.push({
+      kind:"question",
+      id:row.id,
+      name:row.name,
+      question_order:row.question_order,
+      earned:row.earned,
+      max_points:row.max_points,
+      percent:row.percent,
+      correct:row.correct,
+      selected_answer:row.selected_answer,
+      correct_answer:row.correct_answer
+    }));
+
+    let score;
+    if(criteria?.length){
+      const maxRubric=criteria.reduce((sum,c)=>sum+Number(c.max_points||0),0);
+      const earnedRubric=criteria.reduce((sum,c)=>sum+Number(criterionScores[c.id]||0),0);
+      score=maxRubric>0?(earnedRubric/maxRubric)*maxScore:(overallPercent/100)*maxScore;
+    }else{
+      score=(overallPercent/100)*maxScore;
+    }
+    score=Math.round(score*100)/100;
+
+    const strongest=questionRows.filter(row=>row.correct).map(row=>`Soal ${row.question_order}`);
+    const weakest=questionRows.filter(row=>!row.correct).map(row=>`Soal ${row.question_order}`);
+    const feedback=[
+      "Evaluasi otomatis kuis dihitung dari kecocokan jawaban dengan kunci jawaban.",
+      strongest.length?`Kekuatan: ${strongest.join(", ")}.`:"Belum ada jawaban benar pada percobaan ini.",
+      weakest.length?`Perlu ditingkatkan: ${weakest.join(", ")}.`:"Seluruh soal dijawab benar."
+    ].join(" ");
+    return {
+      score,
+      criterionScores,
+      feedback,
+      analysis:{version:1,assignment_type:"quiz",items}
+    };
+  }
+
+  const answerText=[
+    submission?.response_text||"",
+    submission?.external_completion_note||""
+  ].filter(Boolean).join("\n").trim();
+  if(!answerText||!criteria?.length)return null;
+
+  const answerTokens=normalizeScoringText(answerText).split(" ").filter(Boolean);
+  const scoredCriteria=[];
+  for(const criterion of criteria){
+    const keywords=scoringKeywords(`${criterion.criterion_name||""} ${criterion.description||""}`);
+    if(!keywords.length)continue;
+    const coverage=keywordCoverage(keywords,answerTokens);
+    const max=Number(criterion.max_points||0);
+    const earned=Math.round(max*coverage.percent)/100;
+    criterionScores[criterion.id]=earned;
+    const item={
+      kind:"criterion",
+      id:criterion.id,
+      name:criterion.criterion_name,
+      earned,
+      max_points:max,
+      percent:coverage.percent,
+      matched_keywords:coverage.matched,
+      expected_keywords:keywords
+    };
+    items.push(item);
+    scoredCriteria.push(item);
+  }
+  if(!scoredCriteria.length)return null;
+
+  const maxPoints=scoredCriteria.reduce((sum,item)=>sum+item.max_points,0);
+  if(maxPoints<=0)return null;
+  const earnedPoints=scoredCriteria.reduce((sum,item)=>sum+item.earned,0);
+  const score=Math.round((earnedPoints/maxPoints)*maxScore*100)/100;
+  const strongest=scoredCriteria.filter(item=>item.percent>=70).map(item=>item.name);
+  const weakest=scoredCriteria.filter(item=>item.percent<50).map(item=>item.name);
+  const feedback=[
+    "Evaluasi otomatis awal menggunakan kecocokan kata kunci dari nama dan deskripsi rubrik; guru perlu meninjau hasilnya.",
+    strongest.length?`Kekuatan yang terdeteksi: ${strongest.join(", ")}.`:"Belum ada kriteria yang mencapai kecocokan kata kunci 70%.",
+    weakest.length?`Perlu diperkuat: ${weakest.join(", ")}.`:"Tidak ada kriteria dengan kecocokan di bawah 50%."
+  ].join(" ");
+  return {
+    score,
+    criterionScores,
+    feedback,
+    analysis:{version:1,assignment_type:assignment.type||"case",items}
+  };
+}
+
+async function loadTeacherPerformanceDetails(assignments,submissions){
+  const assignmentIds=assignments.map(a=>a.id);
+  const submissionIds=submissions.map(s=>s.id);
+  const [criteria,rubricScores]=await Promise.all([
+    assignmentIds.length
+      ?query(sb.from("rubric_criteria")
+        .select("id,assignment_id,criterion_name,description,max_points,criterion_order")
+        .in("assignment_id",assignmentIds).order("criterion_order"))
+      :Promise.resolve([]),
+    submissionIds.length
+      ?query(sb.from("submission_rubric_scores")
+        .select("submission_id,criterion_id,score").in("submission_id",submissionIds))
+      :Promise.resolve([])
+  ]);
+  return {
+    criteria,
+    rubricScores,
+    assignmentsById:Object.fromEntries(assignments.map(a=>[a.id,a]))
+  };
+}
+
+
+async function loadStudentPerformanceDetails(assignments,submissions){
+  const assignmentIds=assignments.map(a=>a.id);
+  const submissionIds=submissions.map(s=>s.id);
+  const base={
+    criteria:[],
+    rubricScores:[],
+    assignmentsById:Object.fromEntries(assignments.map(a=>[a.id,a]))
+  };
+  if(!assignmentIds.length||!submissionIds.length)return base;
+  try{
+    const [criteria,rubricScores]=await Promise.all([
+      query(sb.from("rubric_criteria")
+        .select("id,assignment_id,criterion_name,description,max_points,criterion_order")
+        .in("assignment_id",assignmentIds).order("criterion_order")),
+      query(sb.from("submission_rubric_scores")
+        .select("submission_id,criterion_id,score").in("submission_id",submissionIds))
+    ]);
+    return {...base,criteria,rubricScores};
+  }catch(error){
+    console.warn("Rincian rubrik tidak dapat dibaca dari akun siswa; grafik utama tetap tersedia.",error);
+    return base;
+  }
+}
+
+function submissionAnalysisItems(submission,details=null){
+  const grade=gradeRows(submission?.submission_grades).find(row=>row.is_published);
+  if(!grade)return [];
+  const parsed=unpackGradeFeedback(grade.feedback);
+  const savedItems=parsed.analysis?.items;
+  let items=Array.isArray(savedItems)?savedItems.map(item=>({
+    ...item,
+    assignment_id:submission.assignment_id,
+    assignment_title:details?.assignmentsById?.[submission.assignment_id]?.title||submission.assignments?.title||"",
+    assignment_type:details?.assignmentsById?.[submission.assignment_id]?.type||submission.assignments?.type||""
+  })):[];
+  const hasSavedCriteria=items.some(item=>item.kind==="criterion");
+  if(details?.criteria?.length&&!hasSavedCriteria){
+    const scoreMap=Object.fromEntries(
+      details.rubricScores
+        .filter(row=>row.submission_id===submission.id)
+        .map(row=>[row.criterion_id,Number(row.score)])
+    );
+    const assignmentCriteria=details.criteria.filter(c=>c.assignment_id===submission.assignment_id);
+    items.push(...assignmentCriteria
+      .filter(c=>scoreMap[c.id]!==undefined)
+      .map(c=>({
+        kind:"criterion",
+        id:c.id,
+        name:c.criterion_name,
+        earned:scoreMap[c.id],
+        max_points:Number(c.max_points||0),
+        percent:Number(c.max_points)>0?scoreMap[c.id]/Number(c.max_points)*100:0,
+        assignment_id:submission.assignment_id,
+        assignment_title:details.assignmentsById?.[submission.assignment_id]?.title||"",
+        assignment_type:details.assignmentsById?.[submission.assignment_id]?.type||""
+      })));
+  }
+  return items.filter(item=>Number.isFinite(Number(item.percent)));
+}
+
+function aggregateAnalysisItems(submissions,details=null){
+  const map=new Map();
+  for(const submission of submissions){
+    for(const item of submissionAnalysisItems(submission,details)){
+      const key=`${submission.assignment_id}:${item.kind}:${item.id||item.name}`;
+      if(!map.has(key)){
+        map.set(key,{
+          ...item,
+          total:0,
+          count:0
+        });
+      }
+      const current=map.get(key);
+      current.total+=Math.max(0,Math.min(100,Number(item.percent)||0));
+      current.count++;
+    }
+  }
+  return [...map.values()].map(item=>({
+    ...item,
+    percent:item.count?item.total/item.count:0
+  }));
+}
+
+function renderAnalysisItems(items,emptyMessage="Belum ada rincian soal atau kriteria yang dapat dianalisis."){
+  if(!items?.length)return `<p class="analysis-empty">${esc(emptyMessage)}</p>`;
+  const sorted=[...items].sort((a,b)=>Number(b.percent)-Number(a.percent));
+  const strongest=sorted.slice(0,Math.min(3,sorted.length));
+  const weakest=[...sorted].reverse().slice(0,Math.min(3,sorted.length));
+  const renderColumn=(title,rows,emptyText)=>`
+    <div class="analysis-column">
+      <h4>${title}</h4>
+      ${rows.length?rows.map(item=>{
+        const percent=Math.max(0,Math.min(100,Number(item.percent)||0));
+        const kind=item.kind==="question"?"SOAL":"KRITERIA RUBRIK";
+        const meta=[
+          item.assignment_title||"",
+          item.count?`${item.count} pengumpulan`:"",
+          item.kind==="question"&&item.correct===false?"Jawaban perlu ditinjau":""
+        ].filter(Boolean).join(" · ");
+        return `<div class="analysis-entry">
+          <div class="analysis-entry-top">
+            <strong>${esc(item.name||"Komponen evaluasi")}</strong>
+            <span>${Math.round(percent)}%</span>
+          </div>
+          <small>${esc(kind)}${meta?` · ${esc(meta)}`:""}</small>
+          <div class="analysis-progress"><span style="width:${percent}%"></span></div>
+        </div>`;
+      }).join(""):`<p class="analysis-empty">${esc(emptyText)}</p>`}
+    </div>`;
+  const summaryStrong=strongest[0];
+  const summaryWeak=weakest[0];
+  const summary=`Paling kuat: ${summaryStrong?.name||"belum tersedia"} (${Math.round(summaryStrong?.percent||0)}%). Area yang paling perlu diperhatikan: ${summaryWeak?.name||"belum tersedia"} (${Math.round(summaryWeak?.percent||0)}%).`;
+  return `<p class="report-intro">${esc(summary)} Persentase menunjukkan rata-rata capaian pada soal atau kriteria yang tersimpan.</p>
+    <div class="analysis-grid">
+      ${renderColumn("Kekuatan yang terlihat",strongest,"Belum ada data kekuatan.")}
+      ${renderColumn("Area yang perlu ditingkatkan",weakest,"Belum ada area perbaikan.")}
+    </div>`;
+}
+
+function renderTrendChart(points,emptyMessage="Grafik akan muncul setelah tersedia nilai yang dipublikasikan."){
+  if(!points?.length)return `<div class="trend-chart"><p class="analysis-empty">${esc(emptyMessage)}</p></div>`;
+  const width=Math.max(500,points.length*105);
+  const height=230;
+  const left=42,right=18,top=18,bottom=52;
+  const plotWidth=width-left-right;
+  const plotHeight=height-top-bottom;
+  const xAt=index=>points.length===1?left+plotWidth/2:left+(index/(points.length-1))*plotWidth;
+  const yAt=value=>top+(100-Math.max(0,Math.min(100,Number(value)||0)))/100*plotHeight;
+  const grid=[0,25,50,75,100].map(value=>{
+    const y=yAt(value);
+    return `<line class="grid-line" x1="${left}" y1="${y}" x2="${width-right}" y2="${y}"/>
+      <text class="axis-label" x="${left-8}" y="${y+3}" text-anchor="end">${value}</text>`;
+  }).join("");
+  const line=points.map((point,index)=>`${xAt(index)},${yAt(point.value)}`).join(" ");
+  const dots=points.map((point,index)=>{
+    const x=xAt(index),y=yAt(point.value);
+    const label=String(point.label||"").length>16?`${String(point.label).slice(0,15)}…`:String(point.label||"");
+    return `<g><title>${esc(point.label||"Penugasan")}: ${Math.round(point.value)}%</title>
+      <circle class="trend-point" cx="${x}" cy="${y}" r="5"/>
+      <text class="point-label" x="${x}" y="${height-25}" text-anchor="middle">${esc(label)}</text>
+      <text class="axis-label" x="${x}" y="${y-10}" text-anchor="middle">${Math.round(point.value)}%</text>
+    </g>`;
+  }).join("");
+  return `<div class="trend-chart"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Grafik tren nilai">
+    ${grid}<polyline class="trend-line" points="${line}"/>${dots}
+  </svg></div>`;
+}
+
+function trendNarrative(points,subject="Perkembangan"){
+  if(!points?.length)return "Belum ada nilai terpublikasi untuk membentuk tren.";
+  if(points.length===1)return `Baru ada satu data penilaian (${Math.round(points[0].value)}%). Grafik akan menunjukkan arah perubahan setelah penilaian berikutnya dipublikasikan.`;
+  const previous=points[points.length-2];
+  const current=points[points.length-1];
+  const delta=Number(current.value)-Number(previous.value);
+  if(delta>1){
+    return `${subject} naik ${delta.toFixed(1)} poin persentase dari "${previous.label}" (${Math.round(previous.value)}%) ke "${current.label}" (${Math.round(current.value)}%).`;
+  }
+  if(delta< -1){
+    return `${subject} turun ${Math.abs(delta).toFixed(1)} poin persentase dari "${previous.label}" (${Math.round(previous.value)}%) ke "${current.label}" (${Math.round(current.value)}%). Periksa rincian soal atau kriteria di bawah untuk melihat area yang paling berpengaruh.`;
+  }
+  return `${subject} relatif stabil: ${Math.round(previous.value)}% pada "${previous.label}" dan ${Math.round(current.value)}% pada "${current.label}".`;
+}
+
+
+function trendItemExplanation(points,submissions,details=null){
+  if(!points?.length)return "";
+  const current=points[points.length-1];
+  const previous=points.length>1?points[points.length-2]:null;
+  const currentSubmissions=submissions.filter(row=>row.assignment_id===current.id);
+  const previousSubmissions=previous
+    ?submissions.filter(row=>row.assignment_id===previous.id)
+    :[];
+  const currentItems=aggregateAnalysisItems(currentSubmissions,details);
+  const previousItems=aggregateAnalysisItems(previousSubmissions,details);
+  if(!currentItems.length){
+    return "Rincian penyebab perubahan belum tersedia untuk penugasan terbaru. Setelah evaluasi otomatis atau skor rubrik dipublikasikan, sistem dapat menunjukkan soal atau kriteria yang kuat dan lemah.";
+  }
+
+  const kindLabel=kind=>kind==="question"?"soal kuis":"kriteria rubrik";
+  const averageByKind=items=>{
+    const groups={};
+    for(const item of items){
+      (groups[item.kind] ||= []).push(Number(item.percent)||0);
+    }
+    return Object.fromEntries(Object.entries(groups).map(([kind,values])=>[
+      kind,values.reduce((a,b)=>a+b,0)/values.length
+    ]));
+  };
+  const currentKinds=averageByKind(currentItems);
+  const previousKinds=averageByKind(previousItems);
+  const changes=[];
+  if(previous){
+    for(const [kind,value] of Object.entries(currentKinds)){
+      if(previousKinds[kind]===undefined)continue;
+      const delta=value-previousKinds[kind];
+      if(delta>1)changes.push(`${kindLabel(kind)} naik ${delta.toFixed(1)} poin`);
+      else if(delta< -1)changes.push(`${kindLabel(kind)} turun ${Math.abs(delta).toFixed(1)} poin`);
+      else changes.push(`${kindLabel(kind)} relatif stabil`);
+    }
+  }
+  const weakest=[...currentItems].sort((a,b)=>a.percent-b.percent)[0];
+  const strongest=[...currentItems].sort((a,b)=>b.percent-a.percent)[0];
+  const changeText=changes.length
+    ?`Dibanding penugasan sebelumnya, ${changes.join("; ")}. `
+    :"";
+  return `${changeText}Pada penugasan terbaru, bagian terkuat adalah ${kindLabel(strongest.kind)} "${strongest.name}" (${Math.round(strongest.percent)}%), sedangkan bagian yang paling perlu diperbaiki adalah ${kindLabel(weakest.kind)} "${weakest.name}" (${Math.round(weakest.percent)}%).`;
+}
+
+function publishedGradeFor(submission){
+  return gradeRows(submission?.submission_grades).find(grade=>grade.is_published)||null;
+}
+
+function empty(title,description,button=""){
+  return `<div class="empty-state">
+    <div class="empty-icon">${uiIcon("inbox",24)}</div>
+    <h3>${esc(title)}</h3>
+    <p>${esc(description)}</p>
+    ${button}
+  </div>`;
+}
+
+function stat(title,value,desc,symbol){
+  return `<div class="stat-card">
+    <div class="stat-top">
+      <span>${esc(title)}</span>
+      <div class="stat-icon">${symbol}</div>
+    </div>
+    <strong>${esc(value)}</strong>
+    <small>${esc(desc)}</small>
+  </div>`;
+}
+
+function header(title,subtitle,action=""){
+  return `<div class="page-header">
+    <div><h1>${esc(title)}</h1><p>${esc(subtitle)}</p></div>
+    ${action}
+  </div>`;
+}
+
+function panel(title,content,subtitle=""){
+  return `<section class="panel">
+    <div class="panel-heading">
+      <div><h3>${esc(title)}</h3>${subtitle?`<p>${esc(subtitle)}</p>`:""}</div>
+    </div>
+    ${content}
+  </section>`;
+}
+
+async function query(request){
+  const {data,error}=await request;
+  if(error) throw error;
+  return data;
+}
+
+function teacher(){
+  return state.profile?.role==="teacher";
+}
+
+function student(){
+  return state.profile?.role==="student";
+}
+
+function go(page,id=""){
+  if(page!=="task"&&state.deadlineTimer){
+    clearTimeout(state.deadlineTimer);
+    state.deadlineTimer=null;
+  }
+  state.page=page;
+  if(page==="task") state.currentTaskId=id;
+  if(page==="review") state.reviewAssignmentId=id || state.reviewAssignmentId;
+  if(page!=="review") state.selectedSubmissionId="";
+  render();
+}
+
+async function loadProfile(user){
+  if(!sb || !user) return null;
+  const {data,error}=await sb
+    .from("profiles")
+    .select("id,full_name,role,email")
+    .eq("id",user.id)
+    .single();
+
+  if(error) throw error;
+  return data;
+}
+
+/* =====================================================
+   LANDING PAGE
+===================================================== */
+
+function landingPage(){
+  return `<div class="landing">
+    <nav class="landing-nav">
+      <div class="brand"><div class="brand-mark">K</div>KANTORA</div>
+      <div class="landing-links">
+        <a href="#tentang">Tentang</a>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#manfaat">Manfaat</a>
+      </div>
+      <button class="btn btn-primary" data-action="login">Masuk →</button>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <span class="eyebrow">VIRTUAL OFFICE LEARNING PLATFORM</span>
+        <h1>Belajar Seperti<br><span>Bekerja.</span></h1>
+        <p>
+          Hadapi kasus nyata. Buktikan kompetensi melalui kinerja.
+          Bangun pengalaman kerja profesional melalui simulasi
+          kantor virtual yang terintegrasi.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-action="login">Mulai Sekarang →</button>
+          <a class="btn btn-outline" href="#tentang">Pelajari KANTORA</a>
+        </div>
+        <div class="hero-foot">
+          Platform pembelajaran berbasis pengalaman kerja virtual.
+        </div>
+      </div>
+
+      <div class="logo-stage" aria-label="Logo KANTORA">
+        <div class="kantora-logo-large">
+          <svg viewBox="0 0 120 120" role="img" aria-label="K">
+            <path d="M27 18h22v34L80 18h27L69 60l39 42H79L49 69v33H27z" fill="#183653"/>
+            <path d="M49 54 81 18h18L63 59z" fill="#4d83c5" opacity=".9"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="tentang" class="landing-section">
+      <span class="eyebrow">TENTANG KANTORA</span>
+      <h2>Belajar melalui pengalaman kerja virtual.</h2>
+      <p>
+        KANTORA menghubungkan pembelajaran dengan simulasi
+        pekerjaan kantor. Guru bertindak sebagai atasan dan
+        pengelola penugasan. Siswa bertindak sebagai karyawan
+        yang menyelesaikan pekerjaan berdasarkan instruksi,
+        prosedur, dan standar penilaian.
+      </p>
+    </section>
+
+    <section id="cara-kerja" class="landing-section section-soft">
+      <span class="eyebrow">CARA KERJA</span>
+      <h2>Dari pembelajaran menjadi kinerja.</h2>
+      <div class="process-grid">
+        <div class="process-card"><span>01</span><h3>Pembelajaran</h3><p>Guru menyampaikan materi dan tujuan pembelajaran.</p></div>
+        <div class="process-card"><span>02</span><h3>Penugasan</h3><p>Guru menyiapkan kasus, dokumen, dan instruksi pekerjaan.</p></div>
+        <div class="process-card"><span>03</span><h3>Pelaksanaan</h3><p>Siswa menganalisis dan menyelesaikan pekerjaan.</p></div>
+        <div class="process-card"><span>04</span><h3>Evaluasi</h3><p>Guru memberikan nilai dan umpan balik berdasarkan rubrik.</p></div>
+      </div>
+    </section>
+
+    <section id="manfaat" class="landing-section">
+      <span class="eyebrow">MANFAAT</span>
+      <h2>Satu platform untuk guru dan siswa.</h2>
+      <div class="benefit-grid">
+        <div class="benefit-card"><span>${uiIcon("users",24)}</span><h3>Untuk Guru</h3><p>Mengelola kelas, menyusun penugasan, memantau pengumpulan, dan mengevaluasi kompetensi siswa.</p></div>
+        <div class="benefit-card"><span>${uiIcon("graduation",24)}</span><h3>Untuk Siswa</h3><p>Melaksanakan simulasi pekerjaan, mengirim hasil, dan melihat perkembangan kinerja.</p></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>KANTORA</strong>
+      <span>Virtual Office Learning & Performance Platform</span>
+      <small>Pendidikan Administrasi Perkantoran, Universitas Negeri Jakarta</small>
+    </footer>
+  </div>`
+}
+
+/* =====================================================
+   AUTHENTICATION PAGE
+===================================================== */
+
+function authPage(){
+  const mode=state.authMode;
+  const titles={
+    login:"Masuk ke KANTORA",
+    register:"Daftar Akun Siswa",
+    forgot:"Pulihkan Password"
+  };
+
+  return `<div class="auth-page">
+    <div class="auth-left">
+      <div class="brand"><div class="brand-mark">K</div>KANTORA</div>
+      <div>
+        <span class="eyebrow">VIRTUAL OFFICE PLATFORM</span>
+        <h1>Belajar seperti<br>bekerja</h1>
+        <p>Hadapi kasus nyata. Buktikan kompetensi melalui kinerja.</p>
+      </div>
+      <small>© KANTORA Virtual Office Learning Platform</small>
+    </div>
+    <div class="auth-right">
+      <form class="auth-form" id="authForm">
+        <button type="button" class="icon-btn" data-action="home">← Kembali</button>
+        <h2>${titles[mode]}</h2>
+        <p>
+          ${mode==="login"
+            ?"Masukkan akun untuk mengakses ruang kerja."
+            :mode==="register"
+              ?"Buat akun untuk bergabung sebagai siswa."
+              :"Masukkan email akun yang terdaftar."}
+        </p>
+
+        ${mode==="register"?`
+          <div class="field"><label>Nama Lengkap</label>
+            <input name="full_name" required placeholder="Nama lengkap">
+          </div>`:""}
+
+        <div class="field"><label>Email</label>
+          <input name="email" type="${mode==="forgot"?"text":"email"}" required placeholder="nama@email.com">
+        </div>
+
+        ${mode!=="forgot"?`
+          <div class="field"><label>Password</label>
+            <input name="password" type="password" required minlength="8" placeholder="Minimal 8 karakter">
+          </div>`:""}
+
+        ${mode==="register"?`
+          <div class="field"><label>Konfirmasi Password</label>
+            <input name="confirmation" type="password" required minlength="8" placeholder="Ulangi password">
+          </div>`:""}
+
+        ${mode==="login"?`
+          <div style="text-align:right;margin:5px 0 18px">
+            <button type="button" class="text-link" data-action="forgot">Lupa password?</button>
+          </div>`:""}
+
+        <div id="authMessage"></div>
+        <button class="btn btn-primary btn-block" type="submit">
+          ${mode==="login"?"Masuk →":mode==="register"?"Daftar Sekarang →":"Kirim Permintaan →"}
+        </button>
+
+        <div class="auth-switch">
+          ${mode==="login"
+            ?`Belum memiliki akun? <button type="button" class="text-link" data-action="register">Daftar siswa</button>`
+            :mode==="register"
+              ?`Sudah memiliki akun? <button type="button" class="text-link" data-action="login">Masuk</button>`
+              :`<button type="button" class="text-link" data-action="login">Kembali ke halaman masuk</button>`}
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>`;
+}
+
+/* =====================================================
+   APP SHELL
+===================================================== */
+
+function shell(content){
+  const isTeacher=teacher();
+  const links=isTeacher?TEACHER_NAV:STUDENT_NAV;
+  const name=state.profile?.full_name || "Pengguna";
+  const initial=name.charAt(0).toUpperCase();
+
+  return `<div class="app-shell">
+    <div class="overlay" id="overlay"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><div class="brand-mark">K</div>KANTORA</div>
+      <div class="sidebar-label">${isTeacher?"TEACHER WORKSPACE":"EMPLOYEE WORKSPACE"}</div>
+      <nav class="sidebar-nav">
+        ${links.map(([page,icon,label])=>`
+          <button class="nav-item ${state.page===page || (page==="assignments"&&state.page==="task") || (page==="reports"&&state.page==="review")?"active":""}"
+            data-page="${page}">
+            <span class="nav-icon">${uiIcon(icon,18)}</span>${label}
+          </button>`).join("")}
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-user">
+          <div class="avatar">${esc(initial)}</div>
+          <div><strong>${esc(name)}</strong><small>${isTeacher?"Guru":"Karyawan / Siswa"}</small></div>
+        </div>
+        <button class="logout" data-action="logout">↪ Keluar</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" data-action="mobile-menu">☰</button>
+        <div class="breadcrumb"><strong>KANTORA</strong><span>›</span><span>${isTeacher?"Teacher Panel":"Employee Panel"}</span></div>
+        <div class="topbar-right">
+          <button class="notification" title="Notifikasi">${uiIcon("bell",18)}</button>
+          <div class="topbar-profile">
+            <div class="avatar">${esc(initial)}</div>
+            <div><strong>${esc(name)}</strong><small>${isTeacher?"Guru":"Karyawan"}</small></div>
+          </div>
+        </div>
+      </header>
+      <div class="page-content">${content}</div>
+    </main>
+  </div>`;
+}
+
+/* =====================================================
+   TEACHER DASHBOARD
+===================================================== */
+
+async function teacherDashboard(){
+  const user=state.session.user;
+
+  const classes=await query(sb.from("classes")
+    .select("id,name")
+    .eq("teacher_id",user.id)
+    .eq("is_archived",false));
+
+  const ids=classes.map(x=>x.id);
+
+  let studentsCount=0;
+  if(ids.length){
+    const {count,error}=await sb.from("class_members")
+      .select("id",{count:"exact",head:true})
+      .in("class_id",ids);
+    if(error) throw error;
+    studentsCount=count||0;
+  }
+
+  const assignments=await query(sb.from("assignments")
+    .select("id,title,type,status,due_at,class_id,created_at")
+    .eq("teacher_id",user.id)
+    .order("created_at",{ascending:false}));
+
+  const active=assignments.filter(x=>x.status==="published").length;
+
+  let submissionsCount=0;
+  const assignmentIds=assignments.map(x=>x.id);
+  if(assignmentIds.length){
+    const {count,error}=await sb.from("submissions")
+      .select("id",{count:"exact",head:true})
+      .in("assignment_id",assignmentIds);
+    if(error) throw error;
+    submissionsCount=count||0;
+  }
+
+  const recent=assignments.slice(0,5);
+
+  return `
+    ${header("Dashboard Guru","Pantau aktivitas pembelajaran dan perkembangan kinerja.")}
+    <div class="welcome-banner">
+      <div>
+        <span class="eyebrow">TEACHER CONTROL PANEL</span>
+        <h2>Selamat datang, ${esc(state.profile.full_name)}.</h2>
+        <p>Kelola kelas, siapkan kasus pekerjaan, dan pantau performa siswa melalui satu ruang kerja.</p>
+      </div>
+      <div class="welcome-symbol">${uiIcon("briefcase",54)}</div>
+    </div>
+
+    <div class="stats-grid">
+      ${stat("Total Kelas",classes.length,"Kelas yang dikelola",uiIcon("users",18))}
+      ${stat("Total Siswa",studentsCount,"Siswa terdaftar",uiIcon("graduation",18))}
+      ${stat("Penugasan Aktif",active,"Penugasan dipublikasikan",uiIcon("clipboard",18))}
+      ${stat("Total Pengumpulan",submissionsCount,"Pekerjaan masuk",uiIcon("fileCheck",18))}
+    </div>
+
+    <div class="content-grid">
+      ${panel("Penugasan Terbaru",recent.length?`
+        <div class="task-list">
+          ${recent.map(x=>`
+            <div class="task-row">
+              <div class="task-icon">${uiIcon("file",19)}</div>
+              <div class="task-info">
+                <strong>${esc(x.title)}</strong>
+                <small>${esc(x.type.toUpperCase())} · Tenggat ${date(x.due_at)}</small>
+              </div>
+              ${badge(x.status)}
+            </div>`).join("")}
+        </div>`:empty("Belum ada penugasan","Buat penugasan pertama untuk memulai simulasi kantor virtual.",
+          '<button class="btn btn-primary" data-page="assignments">Buat Penugasan</button>'),
+        "Daftar penugasan yang dibuat.")}
+      ${panel("Ringkasan Kelas",`
+        <div class="summary-list">
+          <div><span>Kelas dikelola</span><strong>${classes.length}</strong></div>
+          <div><span>Siswa terdaftar</span><strong>${studentsCount}</strong></div>
+          <div><span>Penugasan aktif</span><strong>${active}</strong></div>
+          <div><span>Pengumpulan masuk</span><strong>${submissionsCount}</strong></div>
+        </div>
+        <button class="btn btn-secondary btn-block" data-page="reports">Buka Laporan Kinerja →</button>
+      `,"Informasi aktivitas saat ini.")}
+    </div>`;
+}
+
+/* =====================================================
+   STUDENT DASHBOARD
+===================================================== */
+
+async function studentDashboard(){
+  const user=state.session.user;
+
+  const memberships=await query(sb.from("class_members")
+    .select("class_id,classes(id,name,is_archived)")
+    .eq("student_id",user.id));
+
+  const activeMemberships=filterPendingMemberships(memberships);
+  const ids=activeMemberships.map(x=>x.class_id);
+  let tasks=[];
+
+  if(ids.length){
+    tasks=await query(sb.from("assignments")
+      .select("id,title,type,due_at,alert_title,alert_message,status,class_id,created_at")
+      .in("class_id",ids)
+      .in("status",["published","completed"])
+      .order("created_at",{ascending:false}));
+  }
+
+  const submissions=await query(sb.from("submissions")
+    .select("id,assignment_id,submission_grades(is_published)")
+    .eq("student_id",user.id));
+
+  const submitted=submissions.map(x=>x.assignment_id);
+  const graded=submissions
+    .filter(x=>gradeRows(x.submission_grades).some(g=>g.is_published===true))
+    .map(x=>x.assignment_id);
+  const active=tasks.filter(x=>!submitted.includes(x.id)&&!deadlinePassed(x)).length;
+  const latestTask=tasks[0]||null;
+  const classNames=Object.fromEntries(activeMemberships.map(m=>[
+    m.class_id,m.classes?.name||"Kelas"
+  ]));
+
+  return `
+    ${header("Selamat datang, "+state.profile.full_name,"Siap menyelesaikan pekerjaan hari ini?")}
+    ${latestTask?`
+      <section class="student-alert">
+        <div class="student-alert-copy">
+          <div class="student-alert-kicker">${uiIcon("alert",16)} ALERT! · TUGAS TERBARU</div>
+          <h2>${esc(latestTask.alert_title||latestTask.title)}</h2>
+          <p>${esc(latestTask.alert_message||latestTask.description||"Ada penugasan baru yang perlu diperiksa.")}</p>
+          <div class="student-alert-meta">
+            <span>${uiIcon("users",13)} ${esc(classNames[latestTask.class_id]||"Kelas")}</span>
+            <span>${uiIcon("clock",13)} Tenggat ${date(latestTask.due_at)}</span>
+            ${graded.includes(latestTask.id)?`<span>${uiIcon("check",13)} Sudah dinilai</span>`:submitted.includes(latestTask.id)?`<span>${uiIcon("clock",13)} Menunggu penilaian</span>`:deadlinePassed(latestTask)?`<span>${uiIcon("alert",13)} Tenggat telah lewat</span>`:""}
+          </div>
+        </div>
+        <div class="student-alert-action">
+          <button class="btn btn-primary" data-task="${latestTask.id}">Kerjakan Tugas →</button>
+        </div>
+      </section>
+    `:`
+      <section class="student-alert">
+        <div class="student-alert-copy">
+          <div class="student-alert-kicker">${uiIcon("alert",16)} ALERT!</div>
+          <h2>Belum ada penugasan terbaru</h2>
+          <p>Penugasan dari guru akan tampil di bagian ini setelah dipublikasikan untuk kelas yang kamu ikuti.</p>
+        </div>
+      </section>
+    `}
+    <div class="stats-grid">
+      ${stat("Kelas Diikuti",ids.length,"Kelas terdaftar",uiIcon("users",18))}
+      ${stat("Tugas Aktif",active,"Belum dikumpulkan",uiIcon("clipboard",18))}
+      ${stat("Tugas Selesai",submissions.length,"Sudah dikumpulkan",uiIcon("check",18))}
+      ${stat("Hasil Evaluasi","Lihat","Riwayat penilaian",uiIcon("chart",18))}
+    </div>
+    ${panel("Penugasan Terbaru",tasks.length?`
+      <div class="task-list">
+        ${tasks.slice(0,5).map(x=>`
+          <div class="task-row">
+            <div class="task-icon">${uiIcon("file",19)}</div>
+            <div class="task-info">
+              <strong>${esc(x.title)}</strong>
+              <small>${esc(classNames[x.class_id]||"Kelas")} · ${esc(x.type.toUpperCase())} · Tenggat ${date(x.due_at)}</small>
+            </div>
+            ${graded.includes(x.id)?badge("graded"):submitted.includes(x.id)?badge("submitted"):deadlinePassed(x)?'<span class="pending-label">Tenggat lewat</span>':`<button class="btn btn-small btn-primary" data-task="${x.id}">Kerjakan</button>`}
+          </div>`).join("")}
+      </div>`:empty("Belum ada penugasan","Gabung ke kelas menggunakan kode yang diberikan guru.",
+        '<button class="btn btn-primary" data-page="classes">Gabung Kelas</button>'),
+      "Pekerjaan yang diberikan oleh guru.")}`;
+}
+
+/* =====================================================
+   TEACHER CLASSES
+===================================================== */
+
+async function teacherClasses(){
+  const rows=await query(sb.from("classes")
+    .select("id,name,grade_label,description,is_archived,created_at")
+    .eq("teacher_id",state.session.user.id)
+    .order("created_at",{ascending:false}));
+
+  const editing=rows.find(x=>x.id===state.editingClassId)||null;
+  const selected=rows.find(x=>x.id===state.selectedClassId)||null;
+
+  const cards=await Promise.all(rows.map(async item=>{
+    const {count,error}=await sb.from("class_members")
+      .select("id",{count:"exact",head:true}).eq("class_id",item.id);
+    if(error)throw error;
+    const pending=isPendingDeletion("class",item.id);
+    return `<div class="class-card">
+      <button class="class-open" data-open-class="${item.id}" type="button">
+        <span class="class-card-icon">${uiIcon("users",20)}</span>
+        <span class="class-card-info">
+          <strong>${esc(item.name)}</strong>
+          <small>${esc(item.grade_label||"")} · ${count||0} siswa</small>
+          ${item.is_archived&&!pending?badge("archived"):""}
+          ${pending?'<span class="pending-label">Menunggu penghapusan · Undo tersedia</span>':""}
+        </span>
+      </button>
+      <div class="class-actions">
+        <button data-code="${item.id}" title="Lihat kode kelas" type="button">⌑</button>
+        ${!pending?`<button data-edit-class="${item.id}" title="Edit kelas" type="button">✎</button>
+        <button data-delete-class="${item.id}" title="Hapus kelas" type="button">✕</button>`:""}
+      </div>
+    </div>`;
+  }));
+
+  let memberContent="";
+  if(selected){
+    const membershipsRaw=await query(sb.from("class_members")
+      .select("class_id,student_id")
+      .eq("class_id",selected.id));
+    const memberships=membershipsRaw.filter(m =>
+      !isPendingDeletion("membership", membershipKey(selected.id, m.student_id))
+    );
+    const studentIds=memberships.map(x=>x.student_id);
+    let profiles=[];
+    if(studentIds.length){
+      profiles=await query(sb.from("profiles")
+        .select("id,full_name,email")
+        .in("id",studentIds));
+    }
+    const byId=new Map(profiles.map(x=>[x.id,x]));
+    const collator=new Intl.Collator("id",{sensitivity:"base"});
+    const members=memberships.map(m=>({
+      ...m,
+      profile:byId.get(m.student_id)||{}
+    })).sort((a,b)=>collator.compare(a.profile.full_name||a.profile.email||"",b.profile.full_name||b.profile.email||""));
+
+    memberContent=`
+      <section class="panel" style="margin-bottom:18px">
+        <div class="panel-heading">
+          <div><h3>${esc(selected.name)}</h3><p>${members.length} siswa · Daftar diurutkan berdasarkan abjad nama</p></div>
+          <button class="btn btn-secondary btn-small" data-action="close-class-detail" type="button">Kembali ke daftar</button>
+        </div>
+        ${members.length?`
+          <div class="table-wrap">
+            <table class="student-table">
+              <thead><tr><th>No.</th><th>Nama Siswa</th><th>Email</th><th>Status</th><th>Aksi</th></tr></thead>
+              <tbody>
+                ${members.map((m,i)=>{
+                  const key=membershipKey(selected.id,m.student_id);
+                  const pending=isPendingDeletion("membership",key);
+                  return `<tr>
+                    <td>${i+1}</td>
+                    <td><strong>${esc(m.profile.full_name||"Nama belum tersedia")}</strong></td>
+                    <td>${esc(m.profile.email||"-")}</td>
+                    <td>${pending?'<span class="pending-label">Menunggu dikeluarkan</span>':'<span class="badge badge-published">Terdaftar</span>'}</td>
+                    <td>${pending?'<small class="muted">Undo tersedia pada notifikasi</small>':`
+                      <button class="btn btn-danger btn-small" data-remove-student="${selected.id}" data-student-id="${m.student_id}" type="button">Keluarkan</button>`}</td>
+                  </tr>`;
+                }).join("")}
+              </tbody>
+            </table>
+          </div>`:empty("Belum ada siswa","Siswa yang bergabung melalui kode kelas akan muncul di sini.")}
+      </section>`;
+  }
+
+  const codePanel=state.classCode&&state.classCodeClassId?`
+    <div class="code-result">
+      <span>KODE GABUNG KELAS</span>
+      <strong>${esc(state.classCode)}</strong>
+      <div class="inline-form-actions" style="justify-content:center">
+        <button class="btn btn-secondary btn-small" data-action="copy-class-code" type="button">Salin Kode</button>
+        <button class="btn btn-outline btn-small" data-action="close-class-code" type="button">Tutup</button>
+      </div>
+    </div>`:"";
+
+  return `
+    ${header("Kelas & Siswa","Buka kelas untuk melihat daftar siswa, mengedit informasi, atau mengelola keanggotaan.")}
+    ${codePanel}
+    ${memberContent}
+    <div class="content-grid">
+      ${panel(editing?"Edit Informasi Kelas":"Buat Kelas Baru",`
+        <form id="classForm">
+          <div class="field"><label>Nama Kelas</label><input name="name" required value="${esc(editing?.name||"")}" placeholder="Contoh: XII MPLB 1"></div>
+          <div class="field"><label>Tingkat</label><input name="grade_label" required value="${esc(editing?.grade_label||"")}" placeholder="Contoh: XII"></div>
+          <div class="form-actions">
+            ${editing?'<button class="btn btn-secondary" type="button" data-action="cancel-edit-class">Batal</button>':""}
+            <button class="btn btn-primary" type="submit">${editing?"Simpan Perubahan":"＋ Buat Kelas"}</button>
+          </div>
+        </form>
+      `,editing?"Perubahan akan langsung diperbarui pada kelas yang sama.":"Setiap kelas mendapatkan ID database sendiri dan kode gabung dari sistem.")}
+      ${panel("Daftar Kelas",rows.length?`
+        <div class="class-list">${cards.join("")}</div>
+      `:empty("Belum ada kelas","Kelas yang kamu buat akan muncul di sini."),
+      `${rows.length} kelas terdaftar`)}
+    </div>`;
+}
+
+/* =====================================================
+   STUDENT CLASSES
+===================================================== */
+
+async function studentClasses(){
+  const rows=await query(sb.from("class_members")
+    .select("class_id,student_id,classes(id,name,grade_label,description,is_archived)")
+    .eq("student_id",state.session.user.id));
+
+  const visible=filterPendingMemberships(rows);
+
+  return `
+    ${header("Kelas Saya","Bergabung ke kelas atau keluar dari kelas yang tidak lagi diikuti.")}
+    ${panel("Gabung Kelas",`
+      <form id="joinClassForm" class="join-form">
+        <input name="code" required placeholder="Masukkan kode kelas">
+        <button class="btn btn-primary" type="submit">Gabung Kelas</button>
+      </form>
+    `,"Gunakan kode kelas yang diberikan oleh guru.")}
+    <br>
+    ${panel("Kelas Terdaftar",visible.length?`
+      <div class="class-list">
+        ${visible.map(row=>{
+          const key=membershipKey(row.class_id,state.session.user.id);
+          const pending=isPendingDeletion("membership",key);
+          return `<div class="class-card">
+            <div class="class-card-icon">${uiIcon("users",20)}</div>
+            <div class="class-card-info">
+              <strong>${esc(row.classes.name)}</strong>
+              <small>${esc(row.classes.grade_label||"")} · ${esc(row.classes.description||"")}</small>
+              ${pending?'<span class="pending-label">Permintaan keluar tertunda · Undo tersedia</span>':badge("published")}
+            </div>
+            ${pending?'<small class="muted">Dapat dipulihkan dari notifikasi Undo</small>':`
+              <button class="btn btn-danger btn-small" data-leave-class="${row.class_id}" type="button">Keluar</button>`}
+          </div>`;
+        }).join("")}
+      </div>`:empty("Belum bergabung ke kelas","Masukkan kode kelas untuk memulai.") )}
+  `;
+}
+
+/* =====================================================
+   TEACHER ASSIGNMENTS
+===================================================== */
+
+function questionDraftHTML(){
+  return state.quizDraft.map((q,i)=>`
+    <div class="question-editor" data-question="${i}">
+      <h4>Pertanyaan ${i+1}
+        <button type="button" class="icon-btn" data-remove-question="${i}" style="float:right">✕</button>
+      </h4>
+      <div class="field">
+        <label>Teks Pertanyaan</label>
+        <textarea data-q-text="${i}" rows="2" required>${esc(q.text)}</textarea>
+      </div>
+      <div class="question-options">
+        ${q.options.map((option,j)=>`
+          <div class="field">
+            <label>Pilihan ${String.fromCharCode(65+j)}</label>
+            <input data-q-option="${i}-${j}" value="${esc(option)}" required>
+          </div>`).join("")}
+      </div>
+      <div class="form-grid">
+        <div class="field"><label>Jawaban Benar</label>
+          <select data-q-correct="${i}">
+            ${q.options.map((_,j)=>`<option value="${j}" ${q.correct===j?"selected":""}>Pilihan ${String.fromCharCode(65+j)}</option>`).join("")}
+          </select>
+        </div>
+        <div class="field"><label>Poin</label>
+          <input type="number" min="1" data-q-points="${i}" value="${q.points}">
+        </div>
+      </div>
+    </div>`).join("");
+}
+
+async function teacherAssignments(){
+  const classes=await query(sb.from("classes")
+    .select("id,name,grade_label,is_archived")
+    .eq("teacher_id",state.session.user.id));
+
+  const assignments=await query(sb.from("assignments")
+    .select("id,title,type,status,due_at,max_score,class_id")
+    .eq("teacher_id",state.session.user.id)
+    .order("created_at",{ascending:false}));
+
+  const activeClasses=classes.filter(c=>c.is_archived!==true);
+  const editing=state.editingAssignmentId?state.editingAssignment:null;
+  const rubricsText=(editing?.rubrics||[]).map(r=>
+    `${r.criterion_name||""}|${r.description||""}|${r.max_points||25}`
+  ).join("\n");
+  const classGroups=classes.map(c=>({
+    ...c,
+    assignments:assignments.filter(a=>a.class_id===c.id)
+  })).filter(c=>c.assignments.length);
+  const ungrouped=assignments.filter(a=>!classes.some(c=>c.id===a.class_id));
+
+  const assignmentRows=rows=>rows.map(a=>{
+    const pending=isPendingDeletion("assignment",a.id);
+    return `<tr>
+      <td><strong>${esc(a.title)}</strong>${pending?'<br><span class="pending-label">Menunggu penghapusan</span>':""}</td>
+      <td>${esc(a.type)}</td>
+      <td>${date(a.due_at)}</td>
+      <td>${badge(a.status)}</td>
+      <td><div class="table-actions">
+        <button data-review="${a.id}" title="Evaluasi">${uiIcon("search",15)}</button>
+        ${!pending?`<button data-edit-assignment="${a.id}" title="Edit / Perpanjang tenggat">${uiIcon("pencil",15)}</button>`:""}
+        ${a.status==="draft"?`<button data-publish="${a.id}" title="Publikasikan">${uiIcon("external",15)}</button>`:""}
+        ${a.status==="published"?`<button data-complete="${a.id}" title="Selesaikan">${uiIcon("check",15)}</button>`:""}
+        ${!pending?`<button data-delete-assignment="${a.id}" title="Hapus dengan Undo">${uiIcon("trash",15)}</button>`:""}
+      </div></td>
+    </tr>`;
+  }).join("");
+
+  return `
+    ${header("Daftar Penugasan","Buat, edit, publikasikan, dan kelola simulasi pekerjaan.",
+      `<button class="btn btn-primary" data-action="toggle-assignment">${uiIcon("clipboard",15)} Buat Penugasan</button>`)}
+
+    ${state.showAssignmentForm?`
+      <section class="panel" style="margin-bottom:20px">
+        <div class="panel-heading">
+          <div><h3>${editing?"Edit Penugasan":"Buat Penugasan Baru"}</h3><p>Perubahan memperbarui penugasan yang sama. Guru tetap dapat mengedit dan memperpanjang tenggat setelah tugas terkunci untuk siswa.</p></div>
+          <button class="icon-btn" data-action="toggle-assignment" type="button">✕</button>
+        </div>
+
+        <div class="type-grid">
+          <button type="button" class="type-card ${state.assignmentType==="case"?"active":""}" data-type="case">
+            <span class="type-symbol">${uiIcon("clipboard",22)}</span><strong>Studi Kasus</strong><small>Pekerjaan berbasis kasus.</small>
+          </button>
+          <button type="button" class="type-card ${state.assignmentType==="file"?"active":""}" data-type="file">
+            <span class="type-symbol">${uiIcon("file",22)}</span><strong>Tugas Berkas</strong><small>Unduh dan unggah dokumen.</small>
+          </button>
+          <button type="button" class="type-card ${state.assignmentType==="quiz"?"active":""}" data-type="quiz">
+            <span class="type-symbol">${uiIcon("check",22)}</span><strong>Kuis Interaktif</strong><small>Soal pilihan ganda.</small>
+          </button>
+          <button type="button" class="type-card ${state.assignmentType==="external"?"active":""}" data-type="external">
+            <span class="type-symbol">${uiIcon("external",22)}</span><strong>Tautan Eksternal</strong><small>Aktivitas platform lain.</small>
+          </button>
+        </div>
+
+        <form id="assignmentForm">
+          <input type="hidden" name="type" value="${state.assignmentType}">
+          <div class="form-grid">
+            <div class="field"><label>Judul Penugasan</label>
+              <input name="title" required value="${esc(editing?.title||"")}" placeholder="Pemeriksaan Dokumen Bisnis">
+            </div>
+            <div class="field"><label>Kelas Tujuan</label>
+              <select name="class_id" required>
+                <option value="">Pilih kelas</option>
+                ${activeClasses.map(c=>`<option value="${c.id}" ${editing?.class_id===c.id?"selected":""}>${esc(c.name)}</option>`).join("")}
+              </select>
+            </div>
+            <div class="field"><label>Batas Waktu</label><input name="due_at" type="datetime-local" value="${dateTimeLocal(editing?.due_at)}"></div>
+            <div class="field"><label>Nilai Maksimum</label><input name="max_score" type="number" min="1" max="1000" value="${esc(editing?.max_score??100)}" required></div>
+          </div>
+
+          <div class="field"><label>Judul Alert</label><input name="alert_title" value="${esc(editing?.alert_title||"")}" placeholder="Pemberitahuan untuk siswa"></div>
+          <div class="field"><label>Narasi Kasus / Deskripsi</label>
+            <textarea name="description" rows="4" required placeholder="Jelaskan latar belakang pekerjaan...">${esc(editing?.description||"")}</textarea>
+          </div>
+          <div class="field"><label>Instruksi Pekerjaan</label>
+            <textarea name="instructions" rows="5" required placeholder="Tuliskan langkah kerja yang harus dilakukan siswa...">${esc(editing?.instructions||"")}</textarea>
+          </div>
+          <div class="field"><label>Pesan Alert</label>
+            <textarea name="alert_message" rows="2" placeholder="Pesan singkat pada halaman alert siswa...">${esc(editing?.alert_message||"")}</textarea>
+          </div>
+
+          ${state.assignmentType==="external"?`
+            <div class="form-grid">
+              <div class="field"><label>URL Aktivitas</label><input name="external_url" type="url" required value="${esc(editing?.external_url||"")}" placeholder="https://..."></div>
+              <div class="field"><label>Platform</label><input name="external_platform" value="${esc(editing?.external_platform||"")}" placeholder="Google Forms, Quizizz, dll."></div>
+              <div class="field"><label>Metode Pengumpulan</label>
+                <select name="submission_mode">
+                  <option value="text" ${editing?.submission_mode==="text"?"selected":""}>Catatan penyelesaian</option>
+                  <option value="file" ${editing?.submission_mode==="file"?"selected":""}>Unggah bukti</option>
+                  <option value="both" ${editing?.submission_mode==="both"?"selected":""}>Catatan dan berkas</option>
+                </select>
+              </div>
+            </div>`:""}
+
+          ${state.assignmentType==="quiz"?`
+            <div class="panel-heading" style="margin-top:20px">
+              <h3>Pertanyaan Kuis</h3>
+              <button type="button" class="btn btn-secondary btn-small" data-action="add-question">+ Tambah Soal</button>
+            </div>
+            <div id="questionDraft">${questionDraftHTML()}</div>
+          `:""}
+
+          <div class="field">
+            <label>Rubrik Penilaian</label>
+            <textarea name="rubrics" rows="3" placeholder="Ketepatan Identifikasi|Mampu mengidentifikasi masalah|30&#10;Kesesuaian Tindakan|Menentukan tindakan yang tepat|30&#10;Alasan dan Analisis|Memberikan alasan logis|20&#10;Kelengkapan Jawaban|Jawaban lengkap|20">${esc(rubricsText)}</textarea>
+            <span class="field-help">Satu aspek per baris. Format: Nama aspek | Deskripsi | Skor maksimum.</span>
+          </div>
+
+          ${editing?.files?.length?`
+            <div class="field">
+              <label>Dokumen Pendukung Saat Ini</label>
+              ${editing.files.filter(f=>!isPendingDeletion("assignment_file",f.id)).map(f=>`
+                <div class="existing-file">
+                  <span>${uiIcon("file",16)}</span><span>${esc(f.file_name)}</span>
+                  <button type="button" data-remove-assignment-file="${f.id}" title="Hapus lampiran">${uiIcon("trash",14)}</button>
+                </div>`).join("")}
+            </div>`:""}
+
+          <div class="field">
+            <label>${editing?"Tambah Lampiran":"Dokumen Pendukung"}</label>
+            <input name="files" type="file" multiple>
+            <span class="field-help">Maksimal 5 berkas untuk satu penugasan, maksimal 10 MB per berkas. Lampiran lama tetap tersimpan kecuali dihapus.</span>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" data-action="toggle-assignment">Batal</button>
+            <button type="submit" class="btn btn-primary">${editing?"Simpan Perubahan":"Simpan Draft"}</button>
+          </div>
+        </form>
+      </section>`:""}
+
+    ${classGroups.map(group=>panel(
+      `Kelas ${group.name}`,
+      `<div class="table-wrap"><table>
+        <thead><tr><th>Judul</th><th>Jenis</th><th>Tenggat</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody>${assignmentRows(group.assignments)}</tbody>
+      </table></div>`,
+      `${group.grade_label?esc(group.grade_label)+" · ":""}${group.assignments.length} penugasan di kelas ini.`
+    )).join("")}
+    ${ungrouped.length?panel("Penugasan Tanpa Kelas",`<div class="table-wrap"><table>
+      <thead><tr><th>Judul</th><th>Jenis</th><th>Tenggat</th><th>Status</th><th>Aksi</th></tr></thead>
+      <tbody>${assignmentRows(ungrouped)}</tbody>
+    </table></div>`):""}
+    ${!assignments.length?empty("Belum ada penugasan","Buat penugasan untuk memulai kegiatan pembelajaran."): ""}
+  `;
+}
+
+/* =====================================================
+   TEACHER MATERIALS
+===================================================== */
+
+async function teacherMaterials(){
+  const [classes,materials]=await Promise.all([
+    query(sb.from("classes").select("id,name,grade_label")
+      .eq("teacher_id",state.session.user.id).eq("is_archived",false)),
+    query(sb.from("materials").select("*")
+      .eq("teacher_id",state.session.user.id)
+      .order("created_at",{ascending:false}))
+  ]);
+
+  if(state.selectedMaterialClassId&&!classes.some(c=>c.id===state.selectedMaterialClassId)){
+    state.selectedMaterialClassId="";
+  }
+  const editing=state.editingMaterial;
+  const selectedClass=classes.find(c=>c.id===state.selectedMaterialClassId);
+  const visibleMaterials=materials.filter(m=>
+    !state.selectedMaterialClassId||m.class_id===state.selectedMaterialClassId
+  );
+
+  return `
+    ${header("Materi & Bank Dokumen","Unggah modul berdasarkan kelas dan kelola materi yang pernah dibagikan.")}
+    <div class="material-layout">
+      <aside class="panel">
+        <div class="panel-heading"><div><h3>Kelas yang Dipegang</h3><p>Pilih kelas untuk melihat modul yang pernah dikirim.</p></div></div>
+        <div class="material-class-list">
+          <button type="button" class="material-class-button ${!state.selectedMaterialClassId?"active":""}" data-open-material-class="">
+            ${uiIcon("book",18)}<span class="class-label">Semua Kelas</span><small>${materials.length}</small>
+          </button>
+          ${classes.map(c=>`
+            <button type="button" class="material-class-button ${state.selectedMaterialClassId===c.id?"active":""}" data-open-material-class="${c.id}">
+              ${uiIcon("users",18)}<span class="class-label">${esc(c.name)}</span><small>${materials.filter(m=>m.class_id===c.id).length}</small>
+            </button>`).join("")}
+        </div>
+        ${!classes.length?`<p class="muted" style="margin:12px 0 0">Buat kelas terlebih dahulu sebelum mengunggah modul.</p>`:""}
+      </aside>
+
+      <div>
+        ${panel(editing?"Edit Dokumen":"Unggah Materi / Dokumen",`
+          <form id="materialForm">
+            <div class="field"><label>Kelas Tujuan</label>
+              <select name="class_id" required>
+                <option value="">Pilih kelas</option>
+                ${classes.map(c=>`<option value="${c.id}" ${(editing?.class_id||state.selectedMaterialClassId)===c.id?"selected":""}>${esc(c.name)}</option>`).join("")}
+              </select>
+            </div>
+            <div class="field"><label>Nama Dokumen / Modul</label><input name="title" required value="${esc(editing?.title||"")}"></div>
+            <div class="field"><label>Deskripsi</label><textarea name="description" rows="3">${esc(editing?.description||"")}</textarea></div>
+            ${editing?.storage_path?`<div class="notice success">Berkas utama saat ini tersimpan. Saat mengedit, berkas pertama akan menggantikan berkas utama dan berkas berikutnya ditambahkan sebagai dokumen baru.</div>`:""}
+            <div class="field"><label>${editing?"Ganti / Tambahkan Berkas (Opsional)":"Pilih Berkas"}</label>
+              <input name="material_files" type="file" multiple>
+            </div>
+            <span class="field-help">Maksimal 5 file dalam satu kali unggah, dengan total ukuran seluruh file maksimal 10 MB.</span>
+            <div class="inline-form-actions">
+              ${editing?'<button type="button" class="btn btn-secondary" data-action="cancel-edit-material">Batal</button>':""}
+              <button class="btn btn-primary" type="submit" ${classes.length?"":"disabled"}>${editing?"Simpan Perubahan":`${uiIcon("upload",15)} Simpan Dokumen`}</button>
+            </div>
+          </form>
+        `,editing?"Perubahan memperbarui dokumen yang sama.":"Tentukan kelas tujuan agar seluruh berkas hanya muncul pada kelas yang dipilih.")}
+        <div style="height:16px"></div>
+        ${panel(selectedClass?`Materi Kelas ${selectedClass.name}`:"Materi Semua Kelas",visibleMaterials.length?`
+          <div class="task-list">
+            ${visibleMaterials.map(m=>{
+              const pending=isPendingDeletion("material",m.id);
+              const className=classes.find(c=>c.id===m.class_id)?.name||"Kelas belum ditentukan";
+              return `<div class="task-row">
+                <div class="task-icon">${uiIcon("book",19)}</div>
+                <div class="task-info">
+                  <strong>${esc(m.title)}</strong>
+                  <small>${esc(className)} · ${esc(m.description||"Materi pembelajaran")}</small>
+                  ${pending?'<span class="pending-label">Menunggu penghapusan</span>':""}
+                </div>
+                ${!pending?`
+                  <div class="inline-actions">
+                    <button class="icon-btn" data-edit-material="${m.id}" title="Edit dokumen">${uiIcon("pencil",15)}</button>
+                    <button class="icon-btn" data-delete-material="${m.id}" title="Hapus dengan Undo">${uiIcon("trash",15)}</button>
+                  </div>`:""}
+              </div>`;
+            }).join("")}
+          </div>`:empty("Belum ada modul di kelas ini","Materi yang diunggah untuk kelas ini akan muncul di sini."))}
+      </div>
+    </div>`;
+}
+
+/* =====================================================
+   STUDENT ASSIGNMENTS
+===================================================== */
+
+async function studentAssignments(){
+  const memberships=await query(sb.from("class_members")
+    .select("class_id,classes(id,name,is_archived)")
+    .eq("student_id",state.session.user.id));
+
+  const activeMemberships=filterPendingMemberships(memberships);
+  const ids=activeMemberships.map(x=>x.class_id);
+  if(!ids.length){
+    return `${header("Daftar Penugasan","Periksa pekerjaan yang diberikan guru.")}
+      ${empty("Belum bergabung ke kelas","Masukkan kode kelas sebelum mengakses penugasan.",
+        '<button class="btn btn-primary" data-page="classes">Gabung Kelas</button>')}`;
+  }
+
+  const [tasks,submissions]=await Promise.all([
+    query(sb.from("assignments")
+      .select("*").in("class_id",ids).in("status",["published","completed"])
+      .order("created_at",{ascending:false})),
+    query(sb.from("submissions")
+      .select("id,assignment_id,submitted_at,submission_grades(is_published)")
+      .eq("student_id",state.session.user.id))
+  ]);
+
+  const done=submissions.map(x=>x.assignment_id);
+  const graded=submissions
+    .filter(x=>gradeRows(x.submission_grades).some(g=>g.is_published===true))
+    .map(x=>x.assignment_id);
+  const groups=activeMemberships.map(m=>({
+    id:m.class_id,
+    name:m.classes?.name||"Kelas",
+    tasks:tasks.filter(t=>t.class_id===m.class_id)
+  }));
+
+  return `${header("Daftar Penugasan","Penugasan dipisahkan berdasarkan kelas yang kamu ikuti.")}
+    ${groups.map(group=>panel(`Kelas ${group.name}`,group.tasks.length?`
+      <div class="assignment-grid">
+        ${group.tasks.map(t=>{
+          const submitted=done.includes(t.id);
+          const isGraded=graded.includes(t.id);
+          const locked=deadlinePassed(t);
+          return `<article class="assignment-card">
+            <div class="assignment-card-top">
+              <div class="task-icon">${uiIcon("clipboard",19)}</div>
+              ${isGraded?badge("graded"):submitted?badge("submitted"):locked?'<span class="pending-label">Tenggat lewat</span>':badge("published")}
+            </div>
+            <span class="eyebrow">${esc(t.type.toUpperCase())}</span>
+            <h3>${esc(t.title)}</h3>
+            <p>${esc(t.alert_message||t.description)}</p>
+            <div class="assignment-deadline">${uiIcon("clock",14)} Tenggat ${date(t.due_at)}</div>
+            <button class="btn btn-primary btn-block" data-task="${t.id}">
+              ${submitted?(locked?"Lihat Pengumpulan":"Lihat / Edit Pengumpulan"):locked?"Lihat Detail Tugas":"Mulai Mengerjakan"} →
+            </button>
+          </article>`;
+        }).join("")}
+      </div>`:empty("Belum ada tugas untuk kelas ini","Tugas akan tampil setelah guru memublikasikannya."),`${group.tasks.length} penugasan.`)).join("")}
+  `;
+}
+
+function storedQuizAnswers(submission){
+  if(!submission?.response_text)return {};
+  try{
+    const parsed=JSON.parse(submission.response_text);
+    if(parsed?.kind==="kantora_quiz"&&Array.isArray(parsed.answers)){
+      return Object.fromEntries(parsed.answers.map(x=>[x.question_id,x.option_id]));
+    }
+    return parsed?.answers||{};
+  }catch(_){return {};}
+}
+
+async function studentTask(){
+  const id=state.currentTaskId;
+  if(!id) throw new Error("Penugasan tidak ditemukan.");
+
+  const task=await query(sb.from("assignments")
+    .select("*").eq("id",id).in("status",["published","completed"]).single());
+
+  const [allFiles,submission]=await Promise.all([
+    query(sb.from("assignment_files").select("*").eq("assignment_id",id)),
+    query(sb.from("submissions").select("*")
+      .eq("assignment_id",id)
+      .eq("student_id",state.session.user.id)
+      .maybeSingle())
+  ]);
+
+  const files=allFiles.filter(f=>!isPendingDeletion("assignment_file",f.id));
+  const locked=deadlinePassed(task);
+  if(state.deadlineTimer){
+    clearTimeout(state.deadlineTimer);
+    state.deadlineTimer=null;
+  }
+  if(!locked&&task.status==="published"&&task.due_at){
+    const remaining=new Date(task.due_at).getTime()-Date.now();
+    if(remaining>0){
+      state.deadlineTimer=setTimeout(()=>{
+        state.deadlineTimer=null;
+        if(state.page==="task"&&state.currentTaskId===id)render();
+      },Math.min(remaining+250,2147483000));
+    }
+  }
+  const pendingSubmission=submission&&isPendingDeletion("submission",submission.id);
+
+  let questions=[];
+  if(task.type==="quiz"){
+    questions=await query(sb.from("quiz_questions")
+      .select("id,question_text,question_order,points")
+      .eq("assignment_id",id).order("question_order"));
+    for(const q of questions){
+      q.options=await query(sb.from("quiz_options")
+        .select("id,option_text,option_order")
+        .eq("question_id",q.id).order("option_order"));
+    }
+  }
+
+  const previousAnswers=storedQuizAnswers(submission);
+  const lastChanged=submission?.submitted_at||null;
+
+  const attachmentView=submission?.submitted_file_path?`
+    <div class="document-row answer-file">
+      <span>${uiIcon("file",17)}</span>
+      <div><strong>Lampiran hasil pengumpulan</strong><small>Berkas tetap tersedia untuk dilihat.</small></div>
+      <button type="button" data-open-file="${esc(submission.submitted_file_path)}">↓ Buka</button>
+    </div>`:"";
+
+  const submittedView=submission?`
+    <div class="readonly-answer">
+      <strong>Jawaban yang sudah dikumpulkan</strong>
+      ${task.type==="quiz"?renderSubmissionAnswer(submission.response_text):`
+        <p>${esc(submission.response_text||"Tidak ada jawaban teks.")}</p>
+        ${submission.external_completion_note?`<p>${esc(submission.external_completion_note)}</p>`:""}`}
+      ${attachmentView}
+      <small class="muted">Terakhir diperbarui: ${date(lastChanged)}</small>
+    </div>`:"";
+
+  const quizForm=`
+    <form id="quizForm">
+      <input type="hidden" name="assignment_id" value="${task.id}">
+      ${questions.map((q,i)=>`
+        <div class="quiz-question">
+          <strong>${i+1}. ${esc(q.question_text)}</strong>
+          <small>${q.points} poin</small>
+          ${q.options.map(o=>`
+            <label class="radio-option">
+              <input type="radio" name="q_${q.id}" value="${o.id}" ${previousAnswers[q.id]===o.id?"checked":""} required>
+              ${esc(o.option_text)}
+            </label>`).join("")}
+        </div>`).join("")}
+      <button class="btn btn-primary btn-block" type="submit">${submission?"Simpan Perubahan Jawaban →":"Kirim Jawaban Kuis →"}</button>
+    </form>`;
+
+  const submissionForm=`
+    <form id="submissionForm">
+      <input type="hidden" name="assignment_id" value="${task.id}">
+      ${task.type==="case"?`
+        <div class="field"><label>Jawaban dan Hasil Analisis</label>
+          <textarea name="response_text" rows="9" required placeholder="Tuliskan temuan, analisis, dan keputusan pekerjaan...">${esc(submission?.response_text||"")}</textarea>
+        </div>
+        <div class="field"><label>Lampiran Hasil (Opsional)</label><input name="file" type="file"></div>
+      `:""}
+      ${task.type==="file"?`
+        <div class="field"><label>${submission?.submitted_file_path?"Ganti Berkas Hasil (Opsional)":"Unggah Hasil Pekerjaan"}</label>
+          <input name="file" type="file" ${submission?.submitted_file_path?"":"required"}>
+        </div>
+      `:""}
+      ${task.type==="external"?`
+        <p class="muted">Kerjakan aktivitas melalui platform eksternal.</p>
+        <a class="btn btn-primary btn-block" href="${esc(task.external_url)}" target="_blank" rel="noopener noreferrer">
+          Buka ${esc(task.external_platform||"Platform Eksternal")} ↗
+        </a>
+        ${task.submission_mode!=="file"?`
+          <div class="field" style="margin-top:18px"><label>Catatan Penyelesaian</label>
+            <textarea name="external_completion_note" rows="4" placeholder="Tuliskan hasil pekerjaan...">${esc(submission?.external_completion_note||"")}</textarea>
+          </div>`:""}
+        ${task.submission_mode!=="text"?`
+          <div class="field"><label>${submission?.submitted_file_path?"Ganti Bukti (Opsional)":"Unggah Bukti"}</label>
+            <input name="file" type="file" ${submission?.submitted_file_path?"":task.submission_mode==="file"?"required":""}>
+          </div>`:""}
+      `:""}
+      ${submission?.submitted_file_path?`
+        <div class="notice success">Lampiran saat ini tetap tersimpan. Pilih berkas baru jika ingin menggantinya.</div>`:""}
+      <button class="btn btn-primary btn-block" type="submit">${submission?"Simpan Perubahan Pengumpulan →":"Kirim Hasil Pekerjaan →"}</button>
+    </form>`;
+
+  let workArea="";
+  if(pendingSubmission){
+    workArea=`${submittedView}
+      <div class="deadline-lock">Pengumpulan ini sedang menunggu penghapusan. Gunakan tombol Undo pada notifikasi untuk memulihkannya.</div>`;
+  }else if(locked){
+    workArea=`${submittedView}
+      <div class="deadline-lock">Tenggat telah berakhir. Formulir dan tombol edit/hapus dikunci otomatis. Jawaban dan lampiran yang sudah dikumpulkan tetap dapat dilihat.</div>
+      ${submission?"":empty("Tenggat telah berakhir","Kamu belum mengumpulkan pekerjaan sebelum batas waktu.")}`;
+  }else if(task.type==="quiz"){
+    workArea=`${submission?`
+      <div class="notice success">Pengumpulan sudah tersimpan. Kamu masih dapat memperbarui jawaban berkali-kali sebelum tenggat.</div>
+      ${submittedView}`:""}
+      ${quizForm}
+      ${submission?`<div class="inline-form-actions"><button type="button" class="btn btn-danger btn-small" data-delete-submission="${submission.id}">Hapus Pengumpulan</button></div>`:""}`;
+  }else{
+    workArea=`${submission?`
+      <div class="notice success">Pengumpulan sudah tersimpan. Kamu masih dapat mengedit jawaban dan mengganti lampiran sebelum tenggat.</div>
+      ${submittedView}`:""}
+      ${submissionForm}
+      ${submission?`<div class="inline-form-actions"><button type="button" class="btn btn-danger btn-small" data-delete-submission="${submission.id}">Hapus Pengumpulan</button></div>`:""}`;
+  }
+
+  return `
+    ${header("Detail Penugasan","Baca instruksi, selesaikan pekerjaan, dan perbarui pengumpulan sebelum tenggat.")}
+    <div class="task-detail-hero">
+      <span class="eyebrow">PENUGASAN KANTORA</span>
+      <h2>${esc(task.alert_title||task.title)}</h2>
+      <p>${esc(task.alert_message||task.description)}</p>
+      <div class="task-meta">
+        <span>${uiIcon("clock",14)} ${date(task.due_at)}</span>
+        <span>${uiIcon("clipboard",14)} ${esc(task.type.toUpperCase())}</span>
+        <span>Nilai maksimal ${task.max_score}</span>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <section class="panel">
+        <h3>Instruksi Pekerjaan</h3>
+        <div class="instruction-text">${esc(task.instructions)}</div>
+        ${files.length?`
+          <div class="document-list">
+            <h4>Dokumen Pendukung</h4>
+            ${files.map(f=>`
+              <div class="document-row">
+                <span>${uiIcon("file",17)}</span>
+                <div><strong>${esc(f.file_name)}</strong><small>${Math.round((f.file_size||0)/1024)} KB</small></div>
+                <button type="button" data-open-file="${esc(f.storage_path)}">↓ Buka</button>
+              </div>`).join("")}
+          </div>`:""}
+      </section>
+
+      <section class="panel">
+        <h3>Ruang Pengerjaan</h3>
+        ${workArea}
+      </section>
+    </div>`;
+}
+
+/* =====================================================
+   TEACHER REVIEW
+===================================================== */
+
+async function teacherReview(){
+  const [classes,assignments]=await Promise.all([
+    query(sb.from("classes").select("id,name,grade_label")
+      .eq("teacher_id",state.session.user.id)),
+    query(sb.from("assignments")
+      .select("id,title,max_score,class_id,type")
+      .eq("teacher_id",state.session.user.id)
+      .order("created_at",{ascending:false}))
+  ]);
+
+  if(!assignments.length){
+    return `${header("Hasil & Evaluasi","Periksa hasil pekerjaan siswa berdasarkan kelas.")}
+      ${empty("Belum ada penugasan","Buat penugasan terlebih dahulu.")}`;
+  }
+
+  if(!assignments.some(a=>a.id===state.reviewAssignmentId)){
+    state.reviewAssignmentId=assignments[0].id;
+  }
+
+  const selectedAssignment=assignments.find(a=>a.id===state.reviewAssignmentId);
+  const className=classes.find(c=>c.id===selectedAssignment.class_id)?.name||"Kelas tidak diketahui";
+
+  const submissions=await query(sb.from("submissions")
+    .select("*,profiles!submissions_student_id_fkey(full_name,email),submission_grades(score,feedback,is_published)")
+    .eq("assignment_id",state.reviewAssignmentId)
+    .order("submitted_at",{ascending:false}));
+
+  const criteria=await query(sb.from("rubric_criteria")
+    .select("*").eq("assignment_id",state.reviewAssignmentId)
+    .order("criterion_order"));
+
+  const selected=submissions.find(x=>x.id===state.selectedSubmissionId);
+  const rubricScores=selected?await query(sb.from("submission_rubric_scores")
+    .select("criterion_id,score").eq("submission_id",selected.id)):[];
+  const scoreMap=Object.fromEntries(rubricScores.map(x=>[x.criterion_id,Number(x.score)]));
+  const existingGrade=selected?gradeRows(selected.submission_grades)[0]:null;
+  const existingFeedback=unpackGradeFeedback(existingGrade?.feedback);
+  const quizDetails=selected&&selectedAssignment.type==="quiz"
+    ?await loadQuizEvaluationDetails(selectedAssignment.id)
+    :{questions:[],keysByQuestion:{},optionsByQuestion:{}};
+  const autoEvaluation=selected
+    ?buildAutomaticEvaluation(selectedAssignment,selected,criteria,quizDetails)
+    :null;
+
+  const totalRubricPoints=criteria.reduce((sum,c)=>sum+Number(c.max_points||0),0);
+  const earnedRubricPoints=criteria.reduce((sum,c)=>sum+
+    Number(scoreMap[c.id]??autoEvaluation?.criterionScores?.[c.id]??0),0);
+  const autoScoreFromRubric=criteria.length&&totalRubricPoints>0
+    ?Math.round((earnedRubricPoints/totalRubricPoints)*Number(selectedAssignment.max_score||100)*100)/100
+    :"";
+  const initialScore=existingGrade?.score??(
+    rubricScores.length?autoScoreFromRubric:(autoEvaluation?.score??"")
+  );
+  const autoAnalysis=existingGrade?.is_published
+    ?(existingFeedback.analysis||autoEvaluation?.analysis||null)
+    :(autoEvaluation?.analysis||existingFeedback.analysis||null);
+  const feedbackText=existingFeedback.text||autoEvaluation?.feedback||"";
+  const questionRows=(autoEvaluation?.analysis?.items||[])
+    .filter(item=>item.kind==="question");
+
+  return `
+    ${header("Hasil & Evaluasi","Periksa pekerjaan dan berikan penilaian berdasarkan rubrik per kelas.")}
+    <section class="panel" style="margin-bottom:18px">
+      <div class="field" style="max-width:600px;margin:0">
+        <label>Pilih Penugasan</label>
+        <select id="reviewAssignmentSelect">
+          ${assignments.map(a=>{
+            const name=classes.find(c=>c.id===a.class_id)?.name||"Kelas tidak diketahui";
+            return `<option value="${a.id}" ${a.id===state.reviewAssignmentId?"selected":""}>${esc(name)} · ${esc(a.title)}</option>`;
+          }).join("")}
+        </select>
+      </div>
+      <p class="small" style="margin:12px 0 0">Kelas aktif: <strong>${esc(className)}</strong></p>
+    </section>
+
+    <div class="review-layout">
+      <section class="panel">
+        <div class="panel-heading">
+          <div><h3>Daftar Pengumpulan</h3><p>${submissions.length} pengumpulan · ${esc(className)}</p></div>
+        </div>
+        ${submissions.length?submissions.map(s=>`
+          <button class="submission-item ${selected?.id===s.id?"active":""}" data-select-submission="${s.id}">
+            <div class="avatar">${esc((s.profiles?.full_name||"S").charAt(0).toUpperCase())}</div>
+            <div><strong>${esc(s.profiles?.full_name||"Siswa")}</strong><small>Dikumpulkan ${date(s.submitted_at)}</small></div>
+            ${gradeRows(s.submission_grades)[0]?.is_published?badge("graded"):badge("submitted")}
+          </button>`).join(""):empty("Belum ada pengumpulan","Pengumpulan siswa dari kelas ini akan tampil di sini.")}
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><h3>Detail Penilaian</h3></div>
+        ${selected?`
+          <div class="answer-box">
+            <strong>${esc(selected.profiles?.full_name||"Siswa")}</strong>
+            <div class="small" style="margin-top:5px">Kelas ${esc(className)} · Penugasan ${esc(selectedAssignment.title)}</div>
+            ${renderSubmissionAnswer(selected.response_text)}
+            ${selected.external_completion_note?`<p>${esc(selected.external_completion_note)}</p>`:""}
+            <small class="muted">Dikumpulkan: ${date(selected.submitted_at)}</small>
+            ${selected.submitted_file_path?`
+              <button class="text-link" data-open-file="${esc(selected.submitted_file_path)}">${uiIcon("download",14)} Buka Berkas Hasil</button>`:""}
+          </div>
+          ${autoEvaluation?`
+            <div class="auto-score-panel">
+              <strong>${existingGrade?.is_published?"Evaluasi otomatis tersedia sebagai pembanding":"Nilai dan evaluasi otomatis berhasil dihitung"}</strong>
+              <p>Perkiraan nilai: <b>${autoEvaluation.score}</b> dari ${Number(selectedAssignment.max_score||100)}. Guru tetap dapat mengubah skor sebelum menyimpan atau memublikasikan.</p>
+              ${selectedAssignment.type==="quiz"?`
+                ${questionRows.map(item=>`
+                  <div class="question-review-row">
+                    <span>Soal ${item.question_order}: ${esc(item.name)}<br>
+                      <small>Jawaban siswa: ${esc(item.selected_answer)} · Kunci: ${esc(item.correct_answer)}</small>
+                    </span>
+                    <span>${item.correct?"Benar":"Perlu ditinjau"} · ${item.earned}/${item.max_points}</span>
+                  </div>`).join("")}
+              `:`
+                <p>Perhitungan menggunakan kecocokan kata kunci dari nama dan deskripsi setiap kriteria rubrik. Ini merupakan estimasi awal, bukan penilaian semantik; guru perlu memeriksa isi jawaban.</p>
+              `}
+            </div>
+          `:`
+            <div class="notice info">Penilaian otomatis belum dapat dilakukan. Pastikan rubrik sudah diisi dan jawaban berbentuk teks. Tugas unggah berkas tanpa teks tetap memerlukan pemeriksaan guru.</div>
+          `}
+          <form id="gradeForm" data-max-score="${Number(selectedAssignment.max_score||100)}" style="margin-top:18px">
+            <input type="hidden" name="submission_id" value="${selected.id}">
+            <input type="hidden" name="auto_analysis" value="${esc(autoAnalysis?encodeURIComponent(JSON.stringify(autoAnalysis)):"")}">
+            ${criteria.length?`
+              <h4 style="font-size:12px;margin:18px 0 12px">Rubrik Penilaian</h4>
+              <div class="rubric-auto-note">Skor kriteria diisi otomatis berdasarkan jawaban dan rubrik yang diberikan di awal. Guru tetap dapat mengoreksi setiap skor.</div>
+              ${criteria.map(c=>`
+                <div class="field">
+                  <label>${esc(c.criterion_name)} (maks. ${c.max_points})</label>
+                  <input type="number" name="rubric_${c.id}" min="0" max="${c.max_points}" step="0.01"
+                    data-rubric-max="${Number(c.max_points||0)}" data-rubric-weight="${Number(c.weight||1)}"
+                    data-criterion-name="${esc(c.criterion_name)}"
+                    data-criterion-description="${esc(c.description||"")}"
+                    value="${scoreMap[c.id]??autoEvaluation?.criterionScores?.[c.id]??""}" placeholder="Skor otomatis / koreksi manual">
+                  ${c.description?`<span class="field-help">${esc(c.description)}</span>`:""}
+                </div>`).join("")}
+            `:""}
+            <div class="field"><label>Nilai Akhir (dapat diedit manual)</label>
+              <input name="score" type="number" min="0" max="${selectedAssignment.max_score}" step="0.01" value="${initialScore}" required>
+            </div>
+            <div class="field"><label>Umpan Balik</label>
+              <textarea name="feedback" rows="5" placeholder="Tuliskan evaluasi dan rekomendasi perbaikan...">${esc(feedbackText)}</textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-secondary" type="submit" name="publish" value="false">Simpan Draft</button>
+              <button class="btn btn-primary" type="submit" name="publish" value="true">Publikasikan Nilai</button>
+            </div>
+          </form>
+        `:empty("Pilih pengumpulan","Pilih siswa untuk memeriksa hasil pekerjaan.")}
+      </section>
+    </div>`;
+}
+
+/* =====================================================
+   TEACHER REPORTS
+===================================================== */
+
+async function teacherReports(){
+  const classes=await query(sb.from("classes")
+    .select("id,name,grade_label")
+    .eq("teacher_id",state.session.user.id));
+
+  if(state.reportClassId&&!classes.some(c=>c.id===state.reportClassId)){
+    state.reportClassId="";
+    state.reportStudentId="";
+    state.reportAssignmentId="";
+  }
+
+  let assignmentQuery=sb.from("assignments")
+    .select("id,title,type,class_id,max_score,created_at")
+    .eq("teacher_id",state.session.user.id);
+  if(state.reportClassId)assignmentQuery=assignmentQuery.eq("class_id",state.reportClassId);
+  const assignments=await query(assignmentQuery.order("created_at",{ascending:true}));
+  const ids=assignments.map(x=>x.id);
+  let submissions=[];
+
+  if(ids.length){
+    submissions=await query(sb.from("submissions")
+      .select("id,student_id,assignment_id,submitted_at,response_text,external_completion_note,profiles!submissions_student_id_fkey(full_name,email),submission_grades(score,feedback,is_published)")
+      .in("assignment_id",ids)
+      .order("submitted_at",{ascending:true}));
+  }
+
+  const grades=submissions
+    .flatMap(s=>gradeRows(s.submission_grades))
+    .filter(g=>g.is_published)
+    .map(g=>Number(g.score));
+  const average=grades.length?
+    (grades.reduce((a,b)=>a+b,0)/grades.length).toFixed(1):"0";
+
+  const ranges=[
+    ["90–100",90,100],
+    ["80–89",80,89],
+    ["70–79",70,79],
+    ["Di bawah 70",0,69]
+  ];
+  const selectedClass=classes.find(c=>c.id===state.reportClassId);
+  const details=await loadTeacherPerformanceDetails(assignments,submissions);
+
+  const sortedAssignments=[...assignments].sort((a,b)=>
+    new Date(a.created_at||0)-new Date(b.created_at||0)
+  );
+  const classTrend=sortedAssignments.map(assignment=>{
+    const rows=submissions.filter(s=>s.assignment_id===assignment.id);
+    const published=rows.map(publishedGradeFor).filter(Boolean);
+    if(!published.length)return null;
+    const max=Number(assignment.max_score||100);
+    const value=published.reduce((sum,grade)=>sum+(Number(grade.score)/max*100),0)/published.length;
+    const classLabel=classes.find(c=>c.id===assignment.class_id)?.name||"Kelas";
+    return {
+      id:assignment.id,
+      label:assignment.title,
+      value,
+      count:published.length,
+      detail:`${classLabel} · ${assignment.type||"Penugasan"}`
+    };
+  }).filter(Boolean);
+
+  const studentsMap=new Map();
+  for(const submission of submissions){
+    const id=submission.student_id;
+    if(!id)continue;
+    if(!studentsMap.has(id)){
+      studentsMap.set(id,{
+        id,
+        name:submission.profiles?.full_name||"Siswa",
+        submissions:[]
+      });
+    }
+    studentsMap.get(id).submissions.push(submission);
+  }
+  const students=[...studentsMap.values()].map(person=>{
+    const normalized=person.submissions.map(submission=>{
+      const grade=publishedGradeFor(submission);
+      const assignment=assignments.find(a=>a.id===submission.assignment_id);
+      return grade
+        ?Number(grade.score)/Number(assignment?.max_score||100)*100
+        :null;
+    }).filter(value=>value!==null&&Number.isFinite(value));
+    return {
+      ...person,
+      count:normalized.length,
+      average:normalized.length?normalized.reduce((a,b)=>a+b,0)/normalized.length:null
+    };
+  }).sort((a,b)=>a.name.localeCompare(b.name,"id"));
+
+  if(state.reportStudentId&&!students.some(person=>person.id===state.reportStudentId)){
+    state.reportStudentId="";
+  }
+  if(state.reportAssignmentId&&!assignments.some(a=>a.id===state.reportAssignmentId)){
+    state.reportAssignmentId="";
+  }
+
+  const selectedStudent=students.find(person=>person.id===state.reportStudentId);
+  const selectedStudentSubmissions=selectedStudent?.submissions||[];
+  const studentTrend=selectedStudentSubmissions
+    .map(submission=>{
+      const grade=publishedGradeFor(submission);
+      const assignment=assignments.find(a=>a.id===submission.assignment_id);
+      if(!grade||!assignment)return null;
+      return {
+        id:assignment.id,
+        label:assignment.title,
+        value:Number(grade.score)/Number(assignment.max_score||100)*100,
+        detail:assignment.type||"Penugasan"
+      };
+    })
+    .filter(Boolean)
+    .sort((a,b)=>{
+      const aa=assignments.find(x=>x.id===a.id);
+      const bb=assignments.find(x=>x.id===b.id);
+      return new Date(aa?.created_at||0)-new Date(bb?.created_at||0);
+    });
+
+  const classAnalysis=aggregateAnalysisItems(submissions,details)
+    .filter(item=>!state.reportAssignmentId||item.assignment_id===state.reportAssignmentId);
+  const individualAnalysis=aggregateAnalysisItems(selectedStudentSubmissions,details);
+  const selectedAssignment=assignments.find(a=>a.id===state.reportAssignmentId);
+
+  return `
+    ${header("Hasil & Evaluasi","Pantau tren kelas, buka grafik tiap siswa, dan lihat soal atau kriteria yang memengaruhi hasil.")}
+    <section class="panel" style="margin-bottom:18px">
+      <div class="field" style="max-width:460px;margin:0">
+        <label>Filter Kelas</label>
+        <select id="reportClassSelect">
+          <option value="">Semua Kelas</option>
+          ${classes.map(c=>`<option value="${c.id}" ${state.reportClassId===c.id?"selected":""}>${esc(c.name)}</option>`).join("")}
+        </select>
+      </div>
+      ${selectedClass?`<p class="small" style="margin:10px 0 0">Laporan untuk kelas <strong>${esc(selectedClass.name)}</strong>.</p>`:""}
+    </section>
+    <div class="stats-grid">
+      ${stat("Total Pengumpulan",submissions.length,"Seluruh pengumpulan",uiIcon("fileCheck",18))}
+      ${stat("Sudah Dinilai",grades.length,"Nilai dipublikasikan",uiIcon("check",18))}
+      ${stat("Rata-rata Nilai",average,"Nilai akhir terpublikasi",uiIcon("chart",18))}
+      ${stat("Belum Dinilai",submissions.length-grades.length,"Menunggu evaluasi",uiIcon("clock",18))}
+    </div>
+
+    <section class="panel" style="margin-bottom:18px">
+      <div class="panel-heading">
+        <div><h3>Grafik Perkembangan Kelas</h3><p>Rata-rata nilai setiap penugasan, dinormalisasi ke skala 0–100.</p></div>
+      </div>
+      ${renderTrendChart(classTrend,"Belum ada nilai terpublikasi untuk kelas ini.")}
+      <div class="trend-summary">${esc(trendNarrative(classTrend,"Rata-rata kelas"))}<br>${esc(trendItemExplanation(classTrend,submissions,details))}</div>
+      ${classTrend.length?`
+        <p class="report-intro" style="margin-top:14px">Pilih penugasan untuk melihat soal kuis atau kriteria rubrik yang paling kuat dan yang perlu diperbaiki pada seluruh kelas.</p>
+        <div class="report-assignment-list">
+          <button type="button" class="report-assignment-button ${!state.reportAssignmentId?"active":""}" data-report-assignment="">
+            <span class="assignment-report-copy"><strong>Semua Penugasan</strong><small>Gabungan seluruh evaluasi</small></span>
+          </button>
+          ${sortedAssignments.filter(a=>classTrend.some(point=>point.id===a.id)).map(a=>`
+            <button type="button" class="report-assignment-button ${state.reportAssignmentId===a.id?"active":""}" data-report-assignment="${a.id}">
+              <span class="assignment-report-copy"><strong>${esc(a.title)}</strong><small>${esc(a.type||"Penugasan")}</small></span>
+            </button>`).join("")}
+        </div>`:""}
+    </section>
+
+    <section class="panel" style="margin-bottom:18px">
+      <div class="panel-heading">
+        <div><h3>Analisis Soal & Kriteria Kelas</h3><p>${selectedAssignment?`Rincian untuk ${esc(selectedAssignment.title)}.`:"Gabungan hasil rubrik dan analisis per soal yang sudah dipublikasikan."}</p></div>
+      </div>
+      ${renderAnalysisItems(classAnalysis,"Rincian soal/kriteria akan muncul setelah penilaian otomatis atau skor rubrik dipublikasikan.")}
+    </section>
+
+    <section class="panel" style="margin-bottom:18px">
+      <div class="panel-heading">
+        <div><h3>Perkembangan Per Siswa</h3><p>Klik nama siswa untuk membuka grafik individual dan penjelasan perubahan nilainya.</p></div>
+      </div>
+      ${students.length?`
+        <div class="report-student-list">
+          ${students.map(person=>`
+            <button type="button" class="report-student-button ${state.reportStudentId===person.id?"active":""}" data-report-student="${person.id}">
+              <span class="avatar">${esc(person.name.charAt(0).toUpperCase())}</span>
+              <span class="student-report-copy"><strong>${esc(person.name)}</strong><small>${person.count} nilai dipublikasikan</small></span>
+              <span class="report-average">${person.average===null?"—":`${Math.round(person.average)}%`}</span>
+            </button>`).join("")}
+        </div>
+      `:empty("Belum ada siswa yang mengumpulkan","Daftar siswa akan muncul setelah ada pengumpulan pada kelas ini.")}
+    </section>
+
+    ${selectedStudent?`
+      <section class="panel report-student-detail">
+        <div class="report-detail-heading">
+          <div><h3>Grafik Individual: ${esc(selectedStudent.name)}</h3><p class="small" style="margin:6px 0 0">Perkembangan nilai siswa pada penugasan yang telah dipublikasikan.</p></div>
+          <button type="button" class="btn btn-secondary btn-small" data-clear-report-student>Lihat Semua Siswa</button>
+        </div>
+        ${renderTrendChart(studentTrend,"Belum ada nilai terpublikasi untuk siswa ini.")}
+        <div class="trend-summary">${esc(trendNarrative(studentTrend,`Nilai ${selectedStudent.name}`))}<br>${esc(trendItemExplanation(studentTrend,selectedStudentSubmissions,details))}</div>
+        <div style="margin-top:18px">
+          <h4 style="font-size:12px;margin-bottom:12px">Kekuatan & Area Perbaikan Individual</h4>
+          ${renderAnalysisItems(individualAnalysis,"Belum ada rincian soal atau kriteria untuk siswa ini.")}
+        </div>
+      </section>
+    `:""}
+
+    ${panel("Distribusi Nilai",grades.length?`
+      <div class="distribution">
+        ${ranges.map(([label,min,max])=>{
+          const count=grades.filter(x=>x>=min&&x<=max).length;
+          const percent=count/grades.length*100;
+          return `<div class="distribution-row">
+            <span>${label}</span>
+            <div class="bar-track"><div class="bar-fill" style="width:${percent}%"></div></div>
+            <strong>${count}</strong>
+          </div>`;
+        }).join("")}
+      </div>`:empty("Belum ada data penilaian","Grafik distribusi akan muncul setelah guru memublikasikan nilai."),
+      "Distribusi nilai dari penilaian yang sudah dipublikasikan.")}
+  `;
+}
+
+/* =====================================================
+   STUDENT DOCUMENTS
+===================================================== */
+
+async function studentDocuments(){
+  const memberships=await query(sb.from("class_members")
+    .select("class_id,classes(id,name,is_archived)")
+    .eq("student_id",state.session.user.id));
+
+  const activeMemberships=filterPendingMemberships(memberships);
+  const ids=activeMemberships.map(x=>x.class_id);
+  if(!ids.length){
+    return `${header("Dokumen","Materi dan dokumen dikelompokkan sesuai kelas.")}
+      ${empty("Belum ada dokumen","Gabung ke kelas untuk mengakses materi dari guru.")}`;
+  }
+
+  const assignments=await query(sb.from("assignments")
+    .select("id,title,class_id")
+    .in("class_id",ids)
+    .in("status",["published","completed"]));
+
+  const assignmentIds=assignments.map(x=>x.id);
+  const [assignmentFiles,materials]=await Promise.all([
+    assignmentIds.length
+      ?query(sb.from("assignment_files").select("*").in("assignment_id",assignmentIds))
+      :Promise.resolve([]),
+    query(sb.from("materials").select("*").in("class_id",ids).order("created_at",{ascending:false}))
+  ]);
+
+  const assignmentMap=Object.fromEntries(assignments.map(a=>[a.id,a]));
+  const groups=activeMemberships.map(m=>{
+    const classId=m.class_id;
+    const files=[
+      ...assignmentFiles.filter(f=>{
+        const assignment=assignmentMap[f.assignment_id];
+        return assignment?.class_id===classId&&!isPendingDeletion("assignment_file",f.id);
+      }).map(f=>({
+        id:f.id,title:f.file_name,fileName:f.file_name,path:f.storage_path,
+        detail:`Lampiran penugasan · ${assignmentMap[f.assignment_id]?.title||"Penugasan"}`
+      })),
+      ...materials.filter(material=>material.class_id===classId&&!isPendingDeletion("material",material.id)&&material.storage_path)
+        .map(material=>({
+          id:material.id,title:material.title,
+          fileName:storageFileName(material.storage_path,material.title),
+          path:material.storage_path,
+          detail:material.description||"Materi dari guru"
+        }))
+    ];
+    return {id:classId,name:m.classes?.name||"Kelas",files};
+  });
+
+  return `${header("Dokumen","Materi dan dokumen dikelompokkan sesuai kelas yang kamu ikuti.")}
+    ${groups.map(group=>panel(`Kelas ${group.name}`,group.files.length?`
+      <div class="task-list">
+        ${group.files.map(f=>`
+          <div class="document-row">
+            <span>${uiIcon("file",17)}</span>
+            <div><strong>${esc(f.title)}</strong><small>${esc(f.detail)}</small></div>
+            <button type="button" data-open-file="${esc(f.path)}" title="Buka untuk dibaca">Baca</button>
+            <button type="button" data-download-file="${esc(f.path)}" data-file-name="${esc(f.fileName||f.title)}" title="Unduh file">${uiIcon("download",16)}</button>
+          </div>`).join("")}
+      </div>`:empty("Belum ada dokumen","Materi dari guru untuk kelas ini akan muncul di sini."),`${group.files.length} dokumen tersedia.`)).join("")}
+  `;
+}
+
+/* =====================================================
+   STUDENT RESULTS
+===================================================== */
+
+async function studentResults(){
+  const memberships=await query(sb.from("class_members")
+    .select("class_id,classes(id,name,is_archived)")
+    .eq("student_id",state.session.user.id));
+  const activeMemberships=filterPendingMemberships(memberships);
+
+  const rows=await query(sb.from("submissions")
+    .select("id,assignment_id,submitted_at,assignments(id,title,max_score,class_id,type,created_at),submission_grades(score,feedback,is_published)")
+    .eq("student_id",state.session.user.id)
+    .order("submitted_at",{ascending:false}));
+
+  const assignmentObjects=[...new Map(rows
+    .filter(row=>row.assignments?.id)
+    .map(row=>[row.assignments.id,row.assignments])).values()];
+  const studentDetails=await loadStudentPerformanceDetails(assignmentObjects,rows);
+
+  const grouped=activeMemberships.map(m=>({
+    id:m.class_id,
+    name:m.classes?.name||"Kelas",
+    rows:rows.filter(r=>r.assignments?.class_id===m.class_id)
+  })).filter(group=>group.rows.length);
+
+  return `${header("Hasil & Evaluasi","Lihat grafik perkembangan nilai, kekuatan, dan materi yang perlu ditingkatkan.")}
+    ${grouped.length?grouped.map(group=>{
+      const publishedRows=group.rows.filter(row=>publishedGradeFor(row));
+      const trendPoints=publishedRows.map(row=>{
+        const grade=publishedGradeFor(row);
+        return {
+          id:row.assignment_id,
+          label:row.assignments?.title||"Penugasan",
+          value:Number(grade.score)/Number(row.assignments?.max_score||100)*100,
+          detail:row.assignments?.type||"Penugasan"
+        };
+      }).sort((a,b)=>{
+        const aa=group.rows.find(row=>row.assignment_id===a.id)?.assignments?.created_at||"";
+        const bb=group.rows.find(row=>row.assignment_id===b.id)?.assignments?.created_at||"";
+        return new Date(aa)-new Date(bb);
+      });
+      const analysisItems=aggregateAnalysisItems(publishedRows,studentDetails);
+      return panel(`Kelas ${group.name}`,`
+        <div style="margin-bottom:18px">
+          <div class="panel-heading">
+            <div><h3>Grafik Perkembangan Nilai Saya</h3><p>Hanya nilai yang sudah dipublikasikan guru.</p></div>
+          </div>
+          ${renderTrendChart(trendPoints,"Belum ada nilai yang dipublikasikan untuk kelas ini.")}
+          <div class="trend-summary">${esc(trendNarrative(trendPoints,"Nilai kamu"))}<br>${esc(trendItemExplanation(trendPoints,group.rows,studentDetails))}</div>
+        </div>
+        <div style="margin-bottom:18px">
+          <h4 style="font-size:12px;margin-bottom:12px">Kekuatan & Materi yang Perlu Ditingkatkan</h4>
+          ${renderAnalysisItems(analysisItems,"Rincian soal dan kriteria akan muncul setelah guru memublikasikan evaluasi otomatis atau skor rubrik.")}
+        </div>
+        <div class="task-list">
+          ${group.rows.map(r=>{
+            const grade=publishedGradeFor(r);
+            const feedback=unpackGradeFeedback(grade?.feedback).text;
+            return `<div class="result-card">
+              <div class="task-icon">${uiIcon("fileCheck",19)}</div>
+              <div class="task-info">
+                <strong>${esc(r.assignments?.title)}</strong>
+                <small>${esc(r.assignments?.type||"Penugasan")} · Dikumpulkan ${date(r.submitted_at)}</small>
+                ${grade?`<p class="feedback-text">${esc(feedback||"Belum ada umpan balik.")}</p>`:""}
+              </div>
+              ${grade?`<div class="result-score"><strong>${grade.score}</strong><small>Nilai</small></div>`:badge("submitted")}
+            </div>`;
+          }).join("")}
+        </div>`,`${group.rows.length} pengumpulan · ${publishedRows.length} nilai terpublikasi.`);
+    }).join(""):empty("Belum ada hasil pekerjaan","Hasil akan muncul setelah kamu mengumpulkan tugas dan guru memublikasikan penilaian.")}
+  `;
+}
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function profilePage(){
+  return `${header("Profil Saya","Kelola informasi akun.")}
+    <section class="panel" style="max-width:600px">
+      <form id="profileForm">
+        <div class="field"><label>Nama Lengkap</label>
+          <input name="full_name" required value="${esc(state.profile.full_name)}">
+        </div>
+        <div class="field"><label>Email</label>
+          <input disabled value="${esc(state.session.user.email)}">
+        </div>
+        <div class="field"><label>Peran</label>
+          <input disabled value="${teacher()?"Guru":"Siswa"}">
+        </div>
+        <button class="btn btn-primary" type="submit">Simpan Profil</button>
+      </form>
+    </section>`;
+}
+
+/* =====================================================
+   PAGE ROUTER
+===================================================== */
+
+async function pageContent(){
+  if(teacher()){
+    switch(state.page){
+      case "dashboard":return await teacherDashboard();
+      case "classes":return await teacherClasses();
+      case "assignments":return await teacherAssignments();
+      case "materials":return await teacherMaterials();
+      case "review":return await teacherReview();
+      case "reports":return await teacherReports();
+      case "profile":return profilePage();
+      default:return await teacherDashboard();
+    }
+  }
+
+  switch(state.page){
+    case "dashboard":return await studentDashboard();
+    case "classes":return await studentClasses();
+    case "assignments":return await studentAssignments();
+    case "task":return await studentTask();
+    case "documents":return await studentDocuments();
+    case "results":return await studentResults();
+    case "profile":return profilePage();
+    default:return await studentDashboard();
+  }
+}
+
+/* =====================================================
+   MAIN RENDER
+===================================================== */
+
+async function render(){
+  const token=++state.renderToken;
+
+  if(!configured){
+    app.innerHTML=`<div class="config-screen">
+      <div class="config-card">
+        <div class="brand-mark" style="margin:auto">K</div>
+        <h2>Hubungkan Supabase</h2>
+        <p>Masukkan URL proyek dan publishable key Supabase pada bagian konfigurasi di awal JavaScript.</p>
+        <code>const SUPABASE_URL = "https://PROJECT_ID.supabase.co";</code>
+        <code>const SUPABASE_ANON_KEY = "PUBLISHABLE_KEY";</code>
+      </div>
+    </div>`;
+    return;
+  }
+
+  if(!state.session){
+    app.innerHTML=state.authMode==="landing"?landingPage():authPage();
+    return;
+  }
+
+  if(!state.profile){
+    app.innerHTML=`<div class="loading"><div class="spinner"></div></div>`;
+    return;
+  }
+
+  if(!["teacher","student"].includes(state.profile.role)){
+    app.innerHTML=`<div class="config-screen"><div class="config-card">
+      <h2>Peran akun belum tersedia</h2>
+      <p>Administrator perlu menetapkan peran akun melalui tabel profiles di Supabase.</p>
+      <button class="btn btn-primary" data-action="logout">Keluar</button>
+    </div></div>`;
+    return;
+  }
+
+  try{
+    const content=await pageContent();
+    if(token!==state.renderToken)return;
+    app.innerHTML=shell(content);
+  }catch(error){
+    if(token!==state.renderToken)return;
+    console.error(error);
+    app.innerHTML=shell(`
+      <section class="panel">
+        <h3>Gagal memuat halaman</h3>
+        <p class="muted">${esc(error.message)}</p>
+        <button class="btn btn-primary" data-action="refresh">Coba Lagi</button>
+      </section>`);
+  }
+}
+
+/* =====================================================
+   AUTH ACTIONS
+===================================================== */
+
+async function login(form){
+  const data=new FormData(form);
+  const email=data.get("email");
+  const password=data.get("password");
+
+  const button=form.querySelector('button[type="submit"]');
+  button.disabled=true;
+  button.textContent="Memproses...";
+
+  const {error}=await sb.auth.signInWithPassword({email,password});
+  if(error) throw error;
+}
+
+async function register(form){
+  const data=new FormData(form);
+  const name=String(data.get("full_name")||"").trim();
+  const email=data.get("email");
+  const password=data.get("password");
+  const confirmation=data.get("confirmation");
+
+  if(password!==confirmation) throw new Error("Konfirmasi password tidak sesuai.");
+  if(String(password).length<8) throw new Error("Password minimal 8 karakter.");
+
+  const {data:result,error}=await sb.auth.signUp({
+    email,password,
+    options:{data:{full_name:name}}
+  });
+
+  if(error) throw error;
+
+  if(result.session){
+    notify("Pendaftaran berhasil.");
+  }else{
+    notify("Pendaftaran berhasil. Periksa email untuk konfirmasi akun.");
+    state.authMode="login";
+    render();
+  }
+}
+
+async function forgotPassword(form){
+  const message=document.getElementById("authMessage");
+  if(message){
+    message.innerHTML=`<div class="notice info">Fitur lupa password masih dalam tahap pengembangan. Jika website sudah digunakan, alamat email yang dimasukkan akan dilaporkan kepada pihak sekolah yang menggunakan website ini.</div>`;
+  }
+}
+
+/* =====================================================
+   CLASS ACTIONS
+===================================================== */
+
+async function getClassCode(classId){
+  // Kode dibuat di database dari ID kelas (UUID yang berbeda untuk setiap kelas).
+  // Fungsi get_class_code di Supabase sebaiknya memakai UNIQUE constraint pada kode kelas.
+  const result=await query(sb.rpc("get_class_code",{p_class_id:classId}));
+  const code=Array.isArray(result)?result[0]:result;
+  if(!code)throw new Error("Kode kelas belum dapat dibuat oleh sistem.");
+  return String(code).trim().toUpperCase();
+}
+
+async function saveClass(form){
+  const data=new FormData(form);
+  const payload={
+    name:String(data.get("name")||"").trim(),
+    grade_label:String(data.get("grade_label")||"").trim(),
+    description:String(data.get("description")||"").trim()
+  };
+
+  if(state.editingClassId){
+    await query(sb.from("classes").update(payload)
+      .eq("id",state.editingClassId)
+      .eq("teacher_id",state.session.user.id));
+    state.editingClassId="";
+    notify("Informasi kelas berhasil diperbarui.");
+  }else{
+    const result=await query(sb.from("classes").insert({
+      teacher_id:state.session.user.id,
+      ...payload
+    }).select("id").single());
+
+    const code=await getClassCode(result.id);
+    state.classCode=code;
+    state.classCodeClassId=result.id;
+    notify("Kelas berhasil dibuat. Kode unik kelas siap dibagikan.");
+  }
+  await render();
+}
+
+async function joinClass(form){
+  const data=new FormData(form);
+  const code=String(data.get("code")||"").trim().toUpperCase();
+  await query(sb.rpc("join_class",{p_code:code}));
+  notify("Berhasil bergabung ke kelas.");
+  render();
+}
+
+/* =====================================================
+   ASSIGNMENT ACTIONS
+===================================================== */
+
+async function uploadFile(file,path){
+  if(!file) return null;
+  if(file.size>10*1024*1024) throw new Error("Ukuran berkas maksimal 10 MB.");
+
+  const {error}=await sb.storage.from("kantora-private").upload(path,file);
+  if(error) throw error;
+  return path;
+}
+
+async function openAssignmentEditor(id){
+  const assignment=await query(sb.from("assignments")
+    .select("*").eq("id",id).eq("teacher_id",state.session.user.id).single());
+  const [files,rubrics,questions]=await Promise.all([
+    query(sb.from("assignment_files").select("*").eq("assignment_id",id)),
+    query(sb.from("rubric_criteria").select("*").eq("assignment_id",id).order("criterion_order")),
+    query(sb.from("quiz_questions").select("*").eq("assignment_id",id).order("question_order"))
+  ]);
+
+  const quizDraft=[];
+  for(const q of questions){
+    const options=await query(sb.from("quiz_options")
+      .select("id,option_text,option_order")
+      .eq("question_id",q.id).order("option_order"));
+    const key=await query(sb.from("quiz_answer_keys")
+      .select("correct_option_id").eq("question_id",q.id).maybeSingle());
+    quizDraft.push({
+      id:q.id,
+      text:q.question_text,
+      options:options.map(o=>o.option_text),
+      correct:Math.max(0,options.findIndex(o=>o.id===key?.correct_option_id)),
+      points:q.points||10
+    });
+  }
+
+  state.editingAssignmentId=id;
+  state.editingAssignment={...assignment,files,rubrics};
+  state.assignmentType=assignment.type;
+  state.quizDraft=quizDraft;
+  state.showAssignmentForm=true;
+  await render();
+}
+
+async function createAssignment(form){
+  const data=new FormData(form);
+  const type=String(data.get("type"));
+  const editingId=state.editingAssignmentId;
+  const files=Array.from(data.getAll("files")).filter(x=>x instanceof File&&x.size>0);
+  const retainedFiles=(state.editingAssignment?.files||[])
+    .filter(f=>!isPendingDeletion("assignment_file",f.id)).length;
+
+  if(type==="quiz"&&!state.quizDraft.length){
+    throw new Error("Tambahkan minimal satu pertanyaan kuis.");
+  }
+  if(retainedFiles+files.length>5){
+    throw new Error(`Lampiran penugasan maksimal 5 berkas. Saat ini ${retainedFiles} berkas masih tersimpan.`);
+  }
+  if(files.some(file=>file.size>10*1024*1024)){
+    throw new Error("Ukuran setiap berkas maksimal 10 MB.");
+  }
+
+  const dueAt=data.get("due_at")?new Date(data.get("due_at")).toISOString():null;
+  const payload={
+    class_id:data.get("class_id"),
+    title:String(data.get("title")).trim(),
+    type,
+    description:data.get("description"),
+    alert_title:data.get("alert_title")||data.get("title"),
+    alert_message:data.get("alert_message")||data.get("description"),
+    instructions:data.get("instructions"),
+    due_at:dueAt,
+    max_score:Number(data.get("max_score")),
+    external_url:type==="external"?data.get("external_url"):null,
+    external_platform:type==="external"?data.get("external_platform"):null,
+    submission_mode:type==="external"?(data.get("submission_mode")||"text"):"text"
+  };
+
+  let assignmentId;
+  let reopened=false;
+  if(editingId){
+    const currentStatus=state.editingAssignment?.status;
+    reopened=currentStatus==="completed"&&dueAt&&new Date(dueAt).getTime()>Date.now();
+    await query(sb.from("assignments").update({
+      ...payload,
+      ...(reopened?{status:"published"}:{})
+    }).eq("id",editingId).eq("teacher_id",state.session.user.id));
+    assignmentId=editingId;
+
+    const oldQuestions=await query(sb.from("quiz_questions").select("id").eq("assignment_id",assignmentId));
+    const oldQuestionIds=oldQuestions.map(q=>q.id);
+    if(oldQuestionIds.length){
+      await query(sb.from("quiz_answer_keys").delete().in("question_id",oldQuestionIds));
+      await query(sb.from("quiz_options").delete().in("question_id",oldQuestionIds));
+      await query(sb.from("quiz_questions").delete().in("id",oldQuestionIds));
+    }
+    const oldCriteria=await query(sb.from("rubric_criteria").select("id").eq("assignment_id",assignmentId));
+    const oldCriterionIds=oldCriteria.map(x=>x.id);
+    if(oldCriterionIds.length){
+      await query(sb.from("submission_rubric_scores").delete().in("criterion_id",oldCriterionIds));
+      await query(sb.from("rubric_criteria").delete().in("id",oldCriterionIds));
+    }
+  }else{
+    const created=await query(sb.rpc("kantora_create_assignment",{
+      p_assignment:payload
+    }));
+    assignmentId=typeof created==="string"
+      ?created
+      :Array.isArray(created)
+        ?(created[0]?.id||created[0])
+        :(created?.id||created);
+    if(!assignmentId)throw new Error("Supabase tidak mengembalikan ID penugasan yang baru dibuat. Periksa fungsi kantora_create_assignment pada SQL.");
+  }
+
+  if(type==="quiz"){
+    for(let i=0;i<state.quizDraft.length;i++){
+      const q=state.quizDraft[i];
+      const text=form.querySelector(`[data-q-text="${i}"]`)?.value?.trim();
+      const options=q.options.map((_,j)=>
+        form.querySelector(`[data-q-option="${i}-${j}"]`)?.value?.trim()
+      );
+      const correct=Number(form.querySelector(`[data-q-correct="${i}"]`)?.value||0);
+      const points=Number(form.querySelector(`[data-q-points="${i}"]`)?.value||10);
+
+      if(!text||options.some(x=>!x)) throw new Error("Lengkapi seluruh pertanyaan dan pilihan jawaban.");
+
+      const question=await query(sb.from("quiz_questions")
+        .insert({
+          assignment_id:assignmentId,
+          question_text:text,
+          question_order:i+1,
+          points
+        }).select("id").single());
+
+      const inserted=await query(sb.from("quiz_options")
+        .insert(options.map((option,j)=>({
+          question_id:question.id,
+          option_text:option,
+          option_order:j+1
+        }))).select("id,option_order"));
+
+      await query(sb.from("quiz_answer_keys").insert({
+        question_id:question.id,
+        correct_option_id:inserted.find(x=>x.option_order===correct+1).id
+      }));
+    }
+  }
+
+  const rubricText=String(data.get("rubrics")||"").trim();
+  if(rubricText){
+    const rows=rubricText.split("\n").map((line,i)=>{
+      const parts=line.split("|").map(x=>x.trim());
+      return {
+        assignment_id:assignmentId,
+        criterion_name:parts[0],
+        description:parts[1]||"",
+        max_points:Number(parts[2]||25),
+        weight:1,
+        criterion_order:i+1
+      };
+    }).filter(x=>x.criterion_name);
+    if(rows.length)await query(sb.from("rubric_criteria").insert(rows));
+  }
+
+  for(const file of files){
+    const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+    const path=`assignments/${assignmentId}/${crypto.randomUUID()}-${safeName}`;
+    await uploadFile(file,path);
+    await query(sb.from("assignment_files").insert({
+      assignment_id:assignmentId,
+      file_name:file.name,
+      storage_path:path,
+      mime_type:file.type,
+      file_size:file.size
+    }));
+  }
+
+  state.showAssignmentForm=false;
+  state.quizDraft=[];
+  state.assignmentType="case";
+  state.editingAssignmentId="";
+  state.editingAssignment=null;
+  notify(reopened
+    ?"Tenggat berhasil diperpanjang dan penugasan dibuka kembali untuk siswa."
+    :editingId?"Perubahan penugasan berhasil disimpan.":"Penugasan berhasil disimpan sebagai draft.");
+  render();
+}
+
+async function publishAssignment(id,status){
+  await query(sb.from("assignments")
+    .update({status}).eq("id",id));
+
+  notify(status==="published"?"Penugasan berhasil dipublikasikan.":"Status penugasan diperbarui.");
+  render();
+}
+
+async function deleteAssignment(id){
+  const assignment=await query(sb.from("assignments")
+    .select("status").eq("id",id).single());
+  await queueDeletion("assignment",id,{previousStatus:assignment.status},
+    "Penugasan dijadwalkan untuk dihapus. Tekan Undo untuk memulihkan.");
+}
+
+/* =====================================================
+   MATERIAL ACTIONS
+===================================================== */
+
+async function openMaterialEditor(id){
+  const material=await query(sb.from("materials")
+    .select("*").eq("id",id).eq("teacher_id",state.session.user.id).single());
+  state.editingMaterialId=id;
+  state.editingMaterial=material;
+  state.selectedMaterialClassId=material.class_id||"";
+  await render();
+}
+
+async function createMaterial(form){
+  const data=new FormData(form);
+  const files=Array.from(data.getAll("material_files"))
+    .filter(file=>file instanceof File&&file.size>0);
+  const title=String(data.get("title")||"").trim();
+  const description=String(data.get("description")||"").trim();
+  const classId=String(data.get("class_id")||"");
+  const totalBytes=files.reduce((sum,file)=>sum+file.size,0);
+  const maxTotalBytes=10*1024*1024;
+
+  if(!classId)throw new Error("Pilih kelas tujuan untuk materi ini.");
+  if(files.length>5)throw new Error("Maksimal 5 file dalam satu kali unggah.");
+  if(totalBytes>maxTotalBytes)throw new Error("Total ukuran seluruh file maksimal 10 MB.");
+  if(!state.editingMaterialId&&!files.length)throw new Error("Pilih minimal satu berkas.");
+
+  const editingId=state.editingMaterialId;
+  const oldMaterial=state.editingMaterial;
+  const oldPath=oldMaterial?.storage_path||null;
+  const uploads=files.map((file,index)=>{
+    const id=editingId&&index===0?editingId:crypto.randomUUID();
+    const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+    return {
+      id,
+      file,
+      path:`materials/${id}/${crypto.randomUUID()}-${safeName}`,
+      title:files.length>1&&index>0?`${title} — ${file.name}`:title
+    };
+  });
+  const uploadedPaths=[];
+  const insertedIds=[];
+  let existingUpdated=false;
+
+  try{
+    // Buat row metadata lebih dahulu agar policy Storage dapat memvalidasi
+    // bahwa ID folder memang milik materi guru dan kelas yang benar.
+    if(editingId){
+      await query(sb.from("materials").update({
+        title,description,class_id:classId
+      }).eq("id",editingId).eq("teacher_id",state.session.user.id));
+      existingUpdated=true;
+
+      for(const item of uploads.slice(1)){
+        await query(sb.from("materials").insert({
+          id:item.id,
+          teacher_id:state.session.user.id,
+          class_id:classId,
+          title:item.title,
+          description,
+          storage_path:null
+        }));
+        insertedIds.push(item.id);
+      }
+    }else{
+      for(const item of uploads){
+        await query(sb.from("materials").insert({
+          id:item.id,
+          teacher_id:state.session.user.id,
+          class_id:classId,
+          title:item.title,
+          description,
+          storage_path:null
+        }));
+        insertedIds.push(item.id);
+      }
+    }
+
+    // Setelah row ada, unggah berkas dan simpan path ke row masing-masing.
+    for(const item of uploads){
+      await uploadFile(item.file,item.path);
+      uploadedPaths.push(item.path);
+      await query(sb.from("materials").update({storage_path:item.path})
+        .eq("id",item.id).eq("teacher_id",state.session.user.id));
+    }
+  }catch(error){
+    if(existingUpdated&&oldMaterial){
+      try{
+        await query(sb.from("materials").update({
+          title:oldMaterial.title,
+          description:oldMaterial.description,
+          class_id:oldMaterial.class_id,
+          storage_path:oldMaterial.storage_path
+        }).eq("id",editingId).eq("teacher_id",state.session.user.id));
+      }catch(rollbackError){console.error("Rollback materi gagal:",rollbackError);}
+    }
+    if(insertedIds.length){
+      try{await query(sb.from("materials").delete().in("id",insertedIds));}
+      catch(rollbackError){console.error("Rollback baris materi gagal:",rollbackError);}
+    }
+    await removeStoragePaths(uploadedPaths);
+    throw error;
+  }
+
+  if(editingId&&uploads.length&&oldPath)await removeStoragePaths([oldPath]);
+  state.selectedMaterialClassId=classId;
+  state.editingMaterialId="";
+  state.editingMaterial=null;
+  notify(editingId?"Dokumen berhasil diperbarui.":"Seluruh dokumen berhasil diunggah ke kelas tujuan.");
+  await render();
+}
+
+/* =====================================================
+   STUDENT SUBMISSION
+===================================================== */
+
+async function updateSubmissionRecord(id,payload){
+  await query(sb.from("submissions").update(payload).eq("id",id));
+}
+
+async function insertSubmissionRecord(payload){
+  await query(sb.from("submissions").insert(payload));
+}
+
+async function ensureSubmissionOpen(assignmentId){
+  const task=await query(sb.from("assignments")
+    .select("id,due_at,status").eq("id",assignmentId).single());
+  if(task.status!=="published")throw new Error("Penugasan tidak lagi menerima pengumpulan.");
+  if(deadlinePassed(task))throw new Error("Tenggat telah lewat. Pengumpulan dan perubahan sudah dikunci.");
+  return task;
+}
+
+async function createSubmission(form){
+  const data=new FormData(form);
+  const assignmentId=String(data.get("assignment_id"));
+  await ensureSubmissionOpen(assignmentId);
+
+  const existing=await query(sb.from("submissions")
+    .select("id,submitted_file_path")
+    .eq("assignment_id",assignmentId)
+    .eq("student_id",state.session.user.id)
+    .maybeSingle());
+
+  if(existing){
+    const pending=readPendingDeletes().find(x=>x.userId===state.session.user.id&&x.type==="submission"&&x.id===String(existing.id));
+    if(pending)removePendingItem(pending.key);
+  }
+
+  const file=data.get("file");
+  const oldPath=existing?.submitted_file_path||null;
+  let newPath=oldPath;
+  let uploadedPath=null;
+
+  if(file instanceof File&&file.size){
+    const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+    newPath=`submissions/${state.session.user.id}/${assignmentId}/${crypto.randomUUID()}-${safeName}`;
+    await uploadFile(file,newPath);
+    uploadedPath=newPath;
+  }
+
+  const now=new Date().toISOString();
+  const payload={
+    assignment_id:assignmentId,
+    student_id:state.session.user.id,
+    response_text:data.get("response_text")||null,
+    submitted_file_path:newPath,
+    external_completion_note:data.get("external_completion_note")||null,
+    status:"submitted",
+    submitted_at:now
+  };
+
+  try{
+    if(existing){
+      await updateSubmissionRecord(existing.id,payload);
+      if(uploadedPath&&oldPath)await removeStoragePaths([oldPath]);
+      notify("Pengumpulan diperbarui pada data yang sama.");
+    }else{
+      await insertSubmissionRecord(payload);
+      notify("Pekerjaan berhasil dikumpulkan.");
+    }
+  }catch(error){
+    if(uploadedPath)await removeStoragePaths([uploadedPath]);
+    throw error;
+  }
+
+  go("task",assignmentId);
+}
+
+async function submitQuiz(form){
+  const data=new FormData(form);
+  const assignmentId=String(data.get("assignment_id"));
+  await ensureSubmissionOpen(assignmentId);
+
+  const answers={};
+  for(const [key,value] of data.entries()){
+    if(key.startsWith("q_"))answers[key.substring(2)]=value;
+  }
+
+  const questions=await query(sb.from("quiz_questions")
+    .select("id,question_text,question_order")
+    .eq("assignment_id",assignmentId).order("question_order"));
+
+  if(!questions.length)throw new Error("Pertanyaan kuis tidak ditemukan.");
+  if(questions.some(q=>!answers[q.id]))throw new Error("Jawab seluruh pertanyaan sebelum mengirim.");
+
+  const answerSnapshot=[];
+  for(const q of questions){
+    const options=await query(sb.from("quiz_options")
+      .select("id,option_text").eq("question_id",q.id));
+    const selected=options.find(o=>o.id===answers[q.id]);
+    answerSnapshot.push({
+      question_id:q.id,
+      question:q.question_text,
+      option_id:answers[q.id],
+      answer:selected?.option_text||"Jawaban tidak ditemukan"
+    });
+  }
+  const responseText=JSON.stringify({kind:"kantora_quiz",answers:answerSnapshot});
+
+  const existing=await query(sb.from("submissions")
+    .select("id")
+    .eq("assignment_id",assignmentId)
+    .eq("student_id",state.session.user.id)
+    .maybeSingle());
+
+  if(existing){
+    const pending=readPendingDeletes().find(x=>x.userId===state.session.user.id&&x.type==="submission"&&x.id===String(existing.id));
+    if(pending)removePendingItem(pending.key);
+    await updateSubmissionRecord(existing.id,{
+      assignment_id:assignmentId,
+      student_id:state.session.user.id,
+      response_text:responseText,
+      submitted_file_path:null,
+      external_completion_note:null,
+      status:"submitted",
+      submitted_at:new Date().toISOString()
+    });
+    notify("Jawaban kuis diperbarui pada pengumpulan yang sama.");
+  }else{
+    // RPC lama tetap dipakai untuk proses kuis pertama kali; snapshot jawaban disimpan
+    // pada baris submissions agar perubahan berikutnya memperbarui baris yang sama.
+    await query(sb.rpc("submit_quiz",{
+      p_assignment_id:assignmentId,
+      p_answers:answers
+    }));
+    const created=await query(sb.from("submissions")
+      .select("id")
+      .eq("assignment_id",assignmentId)
+      .eq("student_id",state.session.user.id)
+      .maybeSingle());
+    if(created){
+      await updateSubmissionRecord(created.id,{
+        response_text:responseText,
+        status:"submitted",
+        submitted_at:new Date().toISOString()
+      });
+    }else{
+      await insertSubmissionRecord({
+        assignment_id:assignmentId,
+        student_id:state.session.user.id,
+        response_text:responseText,
+        submitted_file_path:null,
+        external_completion_note:null,
+        status:"submitted",
+        submitted_at:new Date().toISOString()
+      });
+    }
+    notify("Jawaban kuis berhasil dikumpulkan.");
+  }
+
+  go("task",assignmentId);
+}
+
+/* =====================================================
+   GRADE ACTIONS
+===================================================== */
+
+async function saveGrade(form,publish){
+  const data=new FormData(form);
+  const submissionId=data.get("submission_id");
+  const score=Number(data.get("score"));
+  const feedback=data.get("feedback")||"";
+  let analysis=null;
+  const rawAnalysis=String(data.get("auto_analysis")||"");
+  if(rawAnalysis){
+    try{analysis=JSON.parse(decodeURIComponent(rawAnalysis));}
+    catch(error){console.warn("Metadata evaluasi tidak dapat disimpan:",error);}
+  }
+
+  const rubricEntries=[...data.entries()].filter(([key])=>key.startsWith("rubric_"));
+  if(!analysis){
+    const manualItems=[...form.querySelectorAll("[data-rubric-max]")]
+      .filter(input=>input.value!=="")
+      .map(input=>{
+        const max=Number(input.dataset.rubricMax||0);
+        const earned=Number(input.value);
+        return {
+          kind:"criterion",
+          id:input.name.substring(7),
+          name:input.dataset.criterionName||"Kriteria rubrik",
+          description:input.dataset.criterionDescription||"",
+          earned,
+          max_points:max,
+          percent:max>0?earned/max*100:0
+        };
+      });
+    if(manualItems.length){
+      analysis={version:1,assignment_type:"manual",items:manualItems};
+    }
+  }
+  if(analysis?.items){
+    for(const [key,value] of rubricEntries){
+      const criterionId=key.substring(7);
+      const input=form.querySelector(`[name="${key}"]`);
+      const item=analysis.items.find(row=>row.kind==="criterion"&&String(row.id)===criterionId);
+      if(item&&value!==""){
+        const max=Number(input?.dataset.rubricMax||item.max_points||0);
+        item.earned=Number(value);
+        item.max_points=max;
+        item.percent=max>0?Number(value)/max*100:0;
+      }
+    }
+  }
+
+  await query(sb.from("submission_grades").upsert({
+    submission_id:submissionId,
+    score,
+    feedback:packGradeFeedback(feedback,analysis),
+    is_published:publish,
+    published_at:publish?new Date().toISOString():null
+  },{onConflict:"submission_id"}));
+
+  for(const [key,value] of rubricEntries){
+    const criterionId=key.substring(7);
+    if(value===""){
+      await query(sb.from("submission_rubric_scores").delete()
+        .eq("submission_id",submissionId).eq("criterion_id",criterionId));
+      continue;
+    }
+    await query(sb.from("submission_rubric_scores").upsert({
+      submission_id:submissionId,
+      criterion_id:criterionId,
+      score:Number(value)
+    },{onConflict:"submission_id,criterion_id"}));
+  }
+
+  notify(publish?"Nilai berhasil dipublikasikan.":"Penilaian berhasil disimpan.");
+  state.selectedSubmissionId=submissionId;
+  render();
+}
+
+/* =====================================================
+   PROFILE ACTION
+===================================================== */
+
+async function saveProfile(form){
+  const data=new FormData(form);
+  const fullName=String(data.get("full_name")).trim();
+
+  await query(sb.from("profiles")
+    .update({full_name:fullName})
+    .eq("id",state.session.user.id));
+
+  state.profile.full_name=fullName;
+  notify("Profil berhasil diperbarui.");
+  render();
+}
+
+/* =====================================================
+   FILE ACCESS
+===================================================== */
+
+function storageFileName(path,fallback="dokumen"){
+  const last=String(path||"").split("/").pop()||fallback;
+  const withoutId=last.replace(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-/i,"");
+  try{return decodeURIComponent(withoutId)||fallback;}
+  catch(_){return withoutId||fallback;}
+}
+
+async function openPrivateFile(path,mode="preview",fileName=""){
+  let previewWindow=null;
+  if(mode!=="download"){
+    // Buka tab secara sinkron pada gesture klik agar tidak diblokir browser.
+    previewWindow=window.open("about:blank","_blank");
+    if(previewWindow)previewWindow.opener=null;
+  }
+
+  const options=mode==="download"?{download:fileName||true}:{};
+  const {data,error}=await sb.storage.from("kantora-private")
+    .createSignedUrl(path,300,options);
+
+  if(error){
+    if(previewWindow&&!previewWindow.closed)previewWindow.close();
+    throw error;
+  }
+
+  if(mode==="download"){
+    const link=document.createElement("a");
+    link.href=data.signedUrl;
+    link.download=fileName||storageFileName(path);
+    link.rel="noopener";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    return;
+  }
+
+  if(previewWindow&&!previewWindow.closed){
+    previewWindow.location.replace(data.signedUrl);
+  }else{
+    window.location.assign(data.signedUrl);
+  }
+}
+
+/* =====================================================
+   EVENT HANDLERS
+===================================================== */
+
+document.addEventListener("click",async event=>{
+  const target=event.target.closest("button");
+  if(!target)return;
+
+  try{
+    if(target.dataset.confirmCancel!==undefined){
+      document.getElementById("kantora-confirm")?.remove();
+      state.confirmCallback=null;
+      return;
+    }
+    if(target.dataset.confirmAccept!==undefined){
+      const callback=state.confirmCallback;
+      document.getElementById("kantora-confirm")?.remove();
+      state.confirmCallback=null;
+      if(callback)await callback();
+      return;
+    }
+    if(target.dataset.undoDelete){
+      await undoPendingDeletion(target.dataset.undoDelete);
+      return;
+    }
+    if(target.dataset.action==="login"){
+      state.authMode="login";render();return;
+    }
+    if(target.dataset.action==="register"){
+      state.authMode="register";render();return;
+    }
+    if(target.dataset.action==="forgot"){
+      state.authMode="forgot";render();return;
+    }
+    if(target.dataset.action==="home"){
+      state.authMode="landing";render();return;
+    }
+    if(target.dataset.action==="logout"){
+      showConfirm("Keluar dari KANTORA?",async()=>{await sb.auth.signOut();},"Keluar");
+      return;
+    }
+    if(target.dataset.action==="refresh"){
+      render();return;
+    }
+    if(target.dataset.action==="toggle-assignment"){
+      const closing=state.showAssignmentForm;
+      state.showAssignmentForm=!state.showAssignmentForm;
+      if(closing){
+        state.quizDraft=[];
+        state.editingAssignmentId="";
+        state.editingAssignment=null;
+        state.assignmentType="case";
+      }else{
+        state.editingAssignmentId="";
+        state.editingAssignment=null;
+        state.quizDraft=[];
+        state.assignmentType="case";
+      }
+      render();return;
+    }
+    if(target.dataset.action==="add-question"){
+      state.quizDraft.push({text:"",options:["","","",""],correct:0,points:10});
+      const container=document.getElementById("questionDraft");
+      if(container)container.innerHTML=questionDraftHTML();
+      return;
+    }
+    if(target.dataset.removeQuestion!==undefined){
+      state.quizDraft.splice(Number(target.dataset.removeQuestion),1);
+      const container=document.getElementById("questionDraft");
+      if(container)container.innerHTML=questionDraftHTML();
+      return;
+    }
+    if(target.dataset.action==="mobile-menu"){
+      document.getElementById("sidebar")?.classList.toggle("open");
+      document.getElementById("overlay")?.classList.toggle("show");
+      return;
+    }
+    if(target.dataset.action==="close-class-detail"){
+      state.selectedClassId="";
+      render();return;
+    }
+    if(target.dataset.action==="cancel-edit-class"){
+      state.editingClassId="";
+      render();return;
+    }
+    if(target.dataset.action==="cancel-edit-material"){
+      state.editingMaterialId="";
+      state.editingMaterial=null;
+      render();return;
+    }
+    if(target.dataset.openMaterialClass!==undefined){
+      state.selectedMaterialClassId=target.dataset.openMaterialClass;
+      state.editingMaterialId="";
+      state.editingMaterial=null;
+      render();return;
+    }
+    if(target.dataset.action==="close-class-code"){
+      state.classCode="";
+      state.classCodeClassId="";
+      render();return;
+    }
+    if(target.dataset.action==="copy-class-code"){
+      if(!state.classCode)return;
+      try{
+        await navigator.clipboard.writeText(state.classCode);
+      }catch(_){
+        const area=document.createElement("textarea");
+        area.value=state.classCode;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
+      notify("Kode kelas berhasil disalin.");
+      return;
+    }
+
+    if(target.dataset.page){
+      state.showAssignmentForm=false;
+      state.editingAssignmentId="";
+      state.editingAssignment=null;
+      go(target.dataset.page);return;
+    }
+
+    if(target.dataset.type){
+      state.assignmentType=target.dataset.type;
+      if(target.dataset.type!=="quiz")state.quizDraft=[];
+      render();return;
+    }
+
+    if(target.dataset.task){
+      go("task",target.dataset.task);return;
+    }
+
+    if(target.dataset.openClass){
+      state.selectedClassId=target.dataset.openClass;
+      state.editingClassId="";
+      render();return;
+    }
+    if(target.dataset.editClass){
+      state.editingClassId=target.dataset.editClass;
+      state.selectedClassId=target.dataset.editClass;
+      render();return;
+    }
+    if(target.dataset.deleteClass){
+      const classId=target.dataset.deleteClass;
+      const row=await query(sb.from("classes")
+        .select("is_archived").eq("id",classId).single());
+      showConfirm("Menghapus kelas juga akan menghapus penugasan, lampiran, pengumpulan, dan penilaian yang berada di kelas tersebut. Setelah dikonfirmasi, tersedia waktu 5 detik untuk Undo sebelum penghapusan permanen.",async()=>{
+        await queueDeletion("class",classId,{wasArchived:row.is_archived},
+          "Kelas dan seluruh data terkait dijadwalkan untuk dihapus. Tekan Undo untuk memulihkan.");
+      },"Jadwalkan Penghapusan");
+      return;
+    }
+    if(target.dataset.removeStudent){
+      const classId=target.dataset.removeStudent;
+      const studentId=target.dataset.studentId;
+      await queueDeletion("membership",membershipKey(classId,studentId),{
+        classId,studentId
+      },"Siswa dijadwalkan untuk dikeluarkan dari kelas. Tekan Undo untuk membatalkan.");
+      return;
+    }
+    if(target.dataset.leaveClass){
+      const classId=target.dataset.leaveClass;
+      await queueDeletion("membership",membershipKey(classId,state.session.user.id),{
+        classId,studentId:state.session.user.id
+      },"Kamu dijadwalkan keluar dari kelas. Tekan Undo untuk tetap bergabung.");
+      return;
+    }
+
+    if(target.dataset.code){
+      const code=await getClassCode(target.dataset.code);
+      state.classCode=code;
+      state.classCodeClassId=target.dataset.code;
+      render();return;
+    }
+
+    if(target.dataset.editAssignment){
+      await openAssignmentEditor(target.dataset.editAssignment);
+      return;
+    }
+    if(target.dataset.removeAssignmentFile){
+      await queueDeletion("assignment_file",target.dataset.removeAssignmentFile,{},
+        "Lampiran dijadwalkan untuk dihapus. Tekan Undo untuk memulihkan.");
+      return;
+    }
+
+    if(target.dataset.publish){
+      showConfirm("Publikasikan penugasan ini agar siswa dapat mulai mengerjakan?",async()=>{
+        await publishAssignment(target.dataset.publish,"published");
+      },"Publikasikan");
+      return;
+    }
+
+    if(target.dataset.complete){
+      showConfirm("Tandai penugasan selesai? Siswa tidak dapat lagi mengirim atau mengubah jawaban.",async()=>{
+        await publishAssignment(target.dataset.complete,"completed");
+      },"Selesaikan");
+      return;
+    }
+
+    if(target.dataset.deleteAssignment){
+      await deleteAssignment(target.dataset.deleteAssignment);return;
+    }
+
+    if(target.dataset.review){
+      state.reviewAssignmentId=target.dataset.review;
+      state.selectedSubmissionId="";
+      go("review",target.dataset.review);return;
+    }
+
+    if(target.dataset.selectSubmission){
+      state.selectedSubmissionId=target.dataset.selectSubmission;
+      render();return;
+    }
+    if(target.dataset.reportStudent!==undefined){
+      state.reportStudentId=target.dataset.reportStudent;
+      render();return;
+    }
+    if(target.dataset.clearReportStudent!==undefined){
+      state.reportStudentId="";
+      render();return;
+    }
+    if(target.dataset.reportAssignment!==undefined){
+      state.reportAssignmentId=target.dataset.reportAssignment;
+      render();return;
+    }
+
+    if(target.dataset.downloadFile){
+      await openPrivateFile(
+        target.dataset.downloadFile,
+        "download",
+        target.dataset.fileName||storageFileName(target.dataset.downloadFile)
+      );
+      return;
+    }
+
+    if(target.dataset.openFile){
+      await openPrivateFile(target.dataset.openFile,"preview",target.dataset.fileName||"");
+      return;
+    }
+
+    if(target.dataset.editMaterial){
+      await openMaterialEditor(target.dataset.editMaterial);return;
+    }
+    if(target.dataset.deleteMaterial){
+      await queueDeletion("material",target.dataset.deleteMaterial,{},
+        "Dokumen dijadwalkan untuk dihapus. Tekan Undo untuk memulihkan.");
+      return;
+    }
+
+    if(target.dataset.deleteSubmission){
+      const submission=await query(sb.from("submissions")
+        .select("assignment_id").eq("id",target.dataset.deleteSubmission).single());
+      await ensureSubmissionOpen(submission.assignment_id);
+      const grades=await query(sb.from("submission_grades").select("is_published")
+        .eq("submission_id",target.dataset.deleteSubmission));
+      if(grades.some(g=>g.is_published))throw new Error("Pengumpulan yang sudah dinilai dan dipublikasikan tidak dapat dihapus.");
+      await queueDeletion("submission",target.dataset.deleteSubmission,{},
+        "Pengumpulan dijadwalkan untuk dihapus. Tekan Undo untuk memulihkan jawaban dan lampiran.");
+      return;
+    }
+  }catch(error){
+    fail(error);
+  }
+});
+
+document.addEventListener("change",event=>{
+  if(event.target.id==="reviewAssignmentSelect"){
+    state.reviewAssignmentId=event.target.value;
+    state.selectedSubmissionId="";
+    render();
+  }
+  if(event.target.id==="reportClassSelect"){
+    state.reportClassId=event.target.value;
+    state.reportStudentId="";
+    state.reportAssignmentId="";
+    render();
+  }
+  if(event.target.name==="material_files"){
+    const selected=[...event.target.files];
+    const totalBytes=selected.reduce((sum,file)=>sum+file.size,0);
+    if(selected.length>5){
+      notify("Maksimal 5 file dalam satu kali unggah.","error");
+      event.target.value="";
+      return;
+    }
+    if(totalBytes>10*1024*1024){
+      notify("Total ukuran seluruh file maksimal 10 MB.","error");
+      event.target.value="";
+      return;
+    }
+  }
+  if(event.target.name==="files"){
+    const editingCount=(state.editingAssignment?.files||[])
+      .filter(f=>!isPendingDeletion("assignment_file",f.id)).length;
+    if(editingCount+event.target.files.length>5){
+      notify("Maksimal 5 berkas untuk satu penugasan.","error");
+      event.target.value="";
+    }
+    const oversized=[...event.target.files].some(file=>file.size>10*1024*1024);
+    if(oversized){
+      notify("Ukuran setiap berkas maksimal 10 MB.","error");
+      event.target.value="";
+    }
+  }
+});
+
+document.addEventListener("input",event=>{
+  if(!event.target.matches("#gradeForm [data-rubric-max]"))return;
+  const form=event.target.closest("#gradeForm");
+  if(!form)return;
+  const inputs=[...form.querySelectorAll("[data-rubric-max]")];
+  const maxScore=Number(form.dataset.maxScore||100);
+  let earnedPoints=0;
+  let maxPoints=0;
+  for(const input of inputs){
+    const max=Number(input.dataset.rubricMax||0);
+    if(max<=0)continue;
+    const score=input.value===""?0:Number(input.value);
+    earnedPoints+=Math.min(max,Math.max(0,score));
+    maxPoints+=max;
+  }
+  if(maxPoints>0){
+    const scoreField=form.querySelector('[name="score"]');
+    if(scoreField)scoreField.value=String(Math.round((earnedPoints/maxPoints)*maxScore*100)/100);
+  }
+});
+
+document.addEventListener("submit",async event=>{
+  const form=event.target;
+  if(!form.id)return;
+
+  event.preventDefault();
+
+  try{
+    switch(form.id){
+      case "authForm":{
+        const mode=state.authMode;
+        if(mode==="login")await login(form);
+        else if(mode==="register")await register(form);
+        else await forgotPassword(form);
+        break;
+      }
+      case "classForm":await saveClass(form);break;
+      case "joinClassForm":await joinClass(form);break;
+      case "assignmentForm":await createAssignment(form);break;
+      case "materialForm":await createMaterial(form);break;
+      case "submissionForm":await createSubmission(form);break;
+      case "quizForm":await submitQuiz(form);break;
+      case "gradeForm":{
+        const publish=event.submitter?.value==="true";
+        await saveGrade(form,publish);
+        break;
+      }
+      case "profileForm":await saveProfile(form);break;
+    }
+  }catch(error){
+    fail(error);
+    const message=document.getElementById("authMessage");
+    if(message&&form.id==="authForm"){
+      message.innerHTML=`<div class="notice error">${esc(error.message)}</div>`;
+    }
+  }
+});
+
+/* =====================================================
+   AUTH INITIALIZATION
+===================================================== */
+
+async function initialize(){
+  if(!sb){
+    render();
+    return;
+  }
+
+  const {data,error}=await sb.auth.getSession();
+
+  if(error){
+    fail(error);
+    return;
+  }
+
+  state.session=data.session;
+
+  if(state.session){
+    try{
+      state.profile=await loadProfile(state.session.user);
+      state.page="dashboard";
+      await resumePendingDeletions();
+    }catch(error){
+      console.error(error);
+      state.profile=null;
+    }
+  }
+
+  await render();
+
+  sb.auth.onAuthStateChange(async(_event,session)=>{
+    state.session=session;
+
+    if(session){
+      try{
+        state.profile=await loadProfile(session.user);
+        state.page="dashboard";
+        await resumePendingDeletions();
+      }catch(error){
+        console.error(error);
+        state.profile=null;
+      }
+    }else{
+      state.profile=null;
+      state.authMode="landing";
+      state.page="dashboard";
+    }
+
+    await render();
+  });
+}
+
+initialize();
+</script>
+</body>
+</html>
